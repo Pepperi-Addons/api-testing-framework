@@ -9,12 +9,16 @@ import { PepperiNgxLibExamplesComponent } from './pepperi-ngx-lib-examples/peppe
 import { PepperiListExampleComponent } from './pepperi-list-example/pepperi-list-example.component';
 import { PepUIModule } from './modules/pepperi.module';
 import { MaterialModule } from './modules/material.module';
+import { ApiTesterComponent } from './api-tester/api-tester.component';
+import { OrenPlaygroundComponent } from './oren-playground/oren-playground.component';
 
 @NgModule({
     declarations: [
         AppComponent,
         PepperiNgxLibExamplesComponent,
-        PepperiListExampleComponent
+        PepperiListExampleComponent,
+        ApiTesterComponent,
+        OrenPlaygroundComponent
     ],
     imports: [
         BrowserModule,
