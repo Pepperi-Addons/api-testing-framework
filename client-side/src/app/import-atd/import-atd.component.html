@@ -1,0 +1,123 @@
+<div class="addon-container">
+    <div class="header-content">
+        <div class="content">
+            <div class="spacing-element title">
+                <pep-separator
+                    key="sep1"
+                    label="{{ 'Import_Type_Definition_Title' | translate }}"
+                    xAlignment="'left'"
+                >
+                </pep-separator>
+            </div>
+        </div>
+    </div>
+    <div class="main-content">
+        <div class="content">
+            <div class="child1 child-container">
+                <div *ngIf="!showConflictResolution && !showWebhooksResolution">
+                    <pep-select
+                        [key]="'select1'"
+                        label="{{ 'Select_Activity_To_Import' | translate }}"
+                        [options]="activityTypes"
+                        (valueChange)="elementClicked($event)"
+                    >
+                    </pep-select>
+                    <pep-attachment
+                        [key]="'attachment1'"
+                        label="{{ 'Upload_ATD_File' | translate }}"
+                        (valueChange)="onFileSelect($event)"
+                    >
+                    </pep-attachment>
+                    <button
+                        (click)="importAtd()"
+                        rowSpan="2"
+                        mat-button
+                        class="spacing-element pep-button md strong ellipsis"
+                    >
+                        {{ "Import_Button" | translate }}
+                    </button>
+                </div>
+            </div>
+            <div
+                class="list-container"
+                #conflictslistContainer
+                [ngClass]="{ 'hide-list': !showConflictResolution }"
+            >
+                <p>
+                    <strong>{{
+                        "Conflicts_Resolution_Title" | translate
+                    }}</strong>
+                </p>
+
+                <pep-list
+                    #conflictslist
+                    [firstFieldAsLink]="false"
+                    [isReport]="false"
+                    [supportSorting]="false"
+                    [supportResizing]="false"
+                    [selectionTypeForActions]="'none'"
+                    [noDataFoundMsg]="'No data'"
+                    [parentScroll]="conflictslistContainer"
+                    (valueChange)="notifyValueChanged($event)"
+                >
+                </pep-list>
+                <div class="buttons-container">
+                    <button
+                        rowSpan="2"
+                        mat-button
+                        class="spacing-element pep-button md strong ellipsis"
+                    >
+                        {{ "Cancel" | translate }}
+                    </button>
+                    <button
+                        (click)="onOkConflictsClicked()"
+                        rowSpan="2"
+                        mat-button
+                        class="spacing-element pep-button md strong ellipsis"
+                    >
+                        {{ "Ok" | translate }}
+                    </button>
+                </div>
+            </div>
+
+            <div
+                class="list-container"
+                #webhookslistContainer
+                [ngClass]="{ 'hide-list': !showWebhooksResolution }"
+            >
+                <p>
+                    <strong>{{ "Webhooks_Table_Title" | translate }}</strong>
+                </p>
+                <pep-list
+                    #webhookslist
+                    [firstFieldAsLink]="false"
+                    [isReport]="false"
+                    [supportSorting]="false"
+                    [supportResizing]="false"
+                    [selectionTypeForActions]="'none'"
+                    [noDataFoundMsg]="'No data'"
+                    [parentScroll]="webhookslistContainer"
+                    (valueChange)="notifyValueChanged($event)"
+                >
+                </pep-list>
+                <div class="buttons-container">
+                    <button
+                        rowSpan="2"
+                        mat-button
+                        class="spacing-element pep-button md strong ellipsis"
+                    >
+                        {{ "Cancel" | translate }}
+                    </button>
+                    <button
+                        (click)="onOkWebhooksClicked()"
+                        rowSpan="2"
+                        mat-button
+                        class="spacing-element pep-button md strong ellipsis"
+                    >
+                        {{ "Ok" | translate }}
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
