@@ -1,7 +1,7 @@
 {
     "Components_Example_Title": "@pep-addons/ngx-lib : Pepperi Components - Library components written with Angular10",
     "List_Example_Title": "Pep list example",
-``    "List_None": "None",
+    "List_None": "None",
     "Conflicts_Resolution_Title": "Some conflicts were found. Please define the proper resolution.",
     "Webhooks_Table_Title": "Please verify the following web services URLs.",
     "Import_Button": "Import",
