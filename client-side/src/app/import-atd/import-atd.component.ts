@@ -6,6 +6,7 @@ import { ImportAtdService } from "./import-atd.service";
 import { Reference } from "./../../../../models/reference";
 import { Conflict } from "./../../../../models/conflict";
 import { ObjectType } from "./../../../../models/ObjectType.enum";
+import { ConflictStatus } from "../../../../models/ConflictStatus.enum";
 
 import { Guid } from "./../../../../models/guid";
 import { References, Mapping } from "./../../../../models/referencesMap";
@@ -13,7 +14,7 @@ import { __param } from "tslib";
 import { FileStorage } from "@pepperi-addons/papi-sdk";
 import { ReferenceType } from "./../../../../models/referenceType";
 import { Webhook } from "./../../../../models/Webhook";
-import { ResolutionOption } from "./../../../../models/resolutionOption.enum";
+import { ResolutionOptionType } from "../../../../models/ResolutionOption";
 import { pairs } from "rxjs";
 import {
     AddonService,
@@ -32,10 +33,7 @@ import {
     PepListComponent,
     PepListViewType,
 } from "@pepperi-addons/ngx-lib/list";
-import {
-    PepGroupButton,
-    PepGroupButtonsViewType,
-} from "@pepperi-addons/ngx-lib/group-buttons";
+
 import { PepColorType } from "@pepperi-addons/ngx-lib/color";
 import { AppService } from "../app.service";
 
@@ -55,10 +53,8 @@ export class ImportAtdComponent implements OnInit {
     selectedFile: File;
     showConflictResolution: boolean = false;
     showWebhooksResolution: boolean = false;
+    disableConflictButton: boolean = false;
     value = "";
-
-    groupButtons: Array<PepGroupButton>;
-    GROUP_BUTTONS_VIEW_TYPE: PepGroupButtonsViewType = "regular";
     viewType: PepListViewType = "table";
     colorType: PepColorType = "any";
     conflictsList: Conflict[] = [];
@@ -66,6 +62,9 @@ export class ImportAtdComponent implements OnInit {
     typeString = ``;
     typeUUID = ``;
     referenceMap: References;
+    isCallbackWebhokksFinish = false;
+    isCallbackConflictsFinish = false;
+    isCallbackImportFinish = false;
 
     @ViewChild("conflictslist") customConflictList: PepListComponent;
     @ViewChild("webhookslist") customWebhookList: PepListComponent;
@@ -97,63 +96,21 @@ export class ImportAtdComponent implements OnInit {
     ngOnInit() {}
 
     async onOkConflictsClicked() {
+        this.isCallbackConflictsFinish = false;
         if (this.webhooks.length > 0) {
             this.showWebhooks();
+            this.isCallbackConflictsFinish = false;
         } else {
-            this.callToImportATD();
+            await this.callToImportATD();
+            this.isCallbackConflictsFinish = true;
         }
     }
 
     private async hanleConflictsResolution() {
         let Resolution = {};
-        this.conflictsList.forEach(async (conflict) => {
-            let referenceIndex = this.referenceMap.Mapping.findIndex(
-                (pair) => pair.Origin.Name === conflict.Name
-            );
-            if (
-                conflict.Resolution ===
-                ResolutionOption.toString(ResolutionOption.CreateNew)
-            ) {
-                await this.postNewObjectByType(conflict, referenceIndex);
-            } else if (
-                conflict.Resolution ===
-                ResolutionOption.toString(ResolutionOption.OverwriteExisting)
-            ) {
-                if (
-                    conflict.Object ===
-                    ReferenceType.toString(ReferenceType.FileStorage)
-                ) {
-                    let key = `${this.referenceMap.Mapping[referenceIndex].Destination.ID}`;
-                    Resolution[key] = ResolutionOption.OverwriteExisting;
-                    let file: FileStorage = {
-                        InternalID: Number(
-                            this.referenceMap.Mapping[referenceIndex]
-                                .Destination.ID
-                        ),
-                        FileName: this.referenceMap.Mapping[referenceIndex]
-                            .Destination.Name,
-                        URL: this.referenceMap.Mapping[referenceIndex].Origin
-                            .Path,
-                        Title: this.referenceMap.Mapping[referenceIndex]
-                            .Destination.Name,
-                    };
-                    let res = await this.importedService.callToPapi(
-                        "POST",
-                        "/file_storage",
-                        file
-                    );
-                    this.referenceMap.Mapping[
-                        referenceIndex
-                    ].Destination.ID = res.InternalID.toString();
-                }
-            } else if (
-                conflict.Resolution ===
-                ResolutionOption.toString(ResolutionOption.UseExisting)
-            ) {
-                let key = `${this.referenceMap.Mapping[referenceIndex].Destination.ID}`;
-                Resolution[key] = ResolutionOption.UseExisting;
-            }
-        });
+        for (const conflict of this.conflictsList) {
+            await this.handleConflict(conflict, Resolution);
+        }
 
         this.importedService.callToServerAPI(
             "upsert_to_dynamo",
@@ -166,27 +123,55 @@ export class ImportAtdComponent implements OnInit {
         );
     }
 
+    private async handleConflict(conflict: Conflict, Resolution: {}) {
+        let referenceIndex = this.referenceMap.Mapping.findIndex(
+            (pair) => pair.Origin.Name === conflict.Name
+        );
+        if (conflict.Resolution === "CreateNew") {
+            await this.postNewObjectByType(conflict, referenceIndex);
+        } else if (conflict.Resolution === "OverwriteExisting") {
+            if (conflict.Object === "file_storage") {
+                let key = `${this.referenceMap.Mapping[referenceIndex].Destination.ID}`;
+                Resolution[key] = "OverwriteExisting";
+                let file: FileStorage = {
+                    InternalID: Number(
+                        this.referenceMap.Mapping[referenceIndex].Destination.ID
+                    ),
+                    FileName: this.referenceMap.Mapping[referenceIndex]
+                        .Destination.Name,
+                    URL: this.referenceMap.Mapping[referenceIndex].Origin.Path,
+                    Title: this.referenceMap.Mapping[referenceIndex].Destination
+                        .Name,
+                };
+                let res = await this.importedService.callToPapi(
+                    "POST",
+                    "/file_storage",
+                    file
+                );
+                this.referenceMap.Mapping[
+                    referenceIndex
+                ].Destination.ID = res.InternalID.toString();
+            }
+        } else if (conflict.Resolution === "UseExisting") {
+            let key = `${this.referenceMap.Mapping[referenceIndex].Destination.ID}`;
+            Resolution[key] = "UseExisting";
+        }
+    }
+
     private async postNewObjectByType(
         conflict: Conflict,
         referenceIndex: number
     ) {
-        if (
-            conflict.Object ===
-            ReferenceType.toString(ReferenceType.FileStorage)
-        ) {
+        if (conflict.Object === "file_storage") {
             let res = await this.upsertFileStorage(referenceIndex);
             let destinitionRef = {} as Reference;
             destinitionRef.ID = res.InternalID.toString();
             destinitionRef.Name = res.FileName;
-            destinitionRef.Type = ReferenceType.toString(
-                ReferenceType.FileStorage
-            );
+            destinitionRef.Type = "file_storage";
             this.referenceMap.Mapping[
                 referenceIndex
             ].Destination = destinitionRef;
-        } else if (
-            conflict.Object === ReferenceType.toString(ReferenceType.Filter)
-        ) {
+        } else if (conflict.Object === "filter") {
             // let transactionItemScope = await this.getTransactionItemScope(
             //     this.selectedActivity
             // );
@@ -194,21 +179,16 @@ export class ImportAtdComponent implements OnInit {
             let destinitionRef = {} as Reference;
             destinitionRef.ID = res.InternalID.toString();
             destinitionRef.Name = res.FileName;
-            destinitionRef.Type = ReferenceType.toString(ReferenceType.Filter);
+            destinitionRef.Type = "filter";
             this.referenceMap.Mapping[
                 referenceIndex
             ].Destination = destinitionRef;
-        } else if (
-            conflict.Object ===
-            ReferenceType.toString(ReferenceType.UserDefinedTable)
-        ) {
+        } else if (conflict.Object === "user_defined_table") {
             let res = await this.upsertUDT(referenceIndex);
             let destinitionRef = {} as Reference;
             destinitionRef.ID = res.InternalID.toString();
             destinitionRef.Name = res.TableID;
-            destinitionRef.Type = ReferenceType.toString(
-                ReferenceType.UserDefinedTable
-            );
+            destinitionRef.Type = "user_defined_table";
 
             this.referenceMap.Mapping[
                 referenceIndex
@@ -242,8 +222,10 @@ export class ImportAtdComponent implements OnInit {
     }
 
     private async upsertTransactionItemScope(referenceIndex: number) {
-        let id = this.importedService.exportedAtd.Settings
-            .TransactionItemsScopeFilterID;
+        const settings = await this.importedService.callToPapi(
+            "GET",
+            `/meta_data/transactions/types/${this.selectedActivity}/settings`
+        );
         let filter = {
             Name: ``,
             Data: JSON.parse(
@@ -260,8 +242,8 @@ export class ImportAtdComponent implements OnInit {
                 },
             },
         };
-        if (id) {
-            filter[`InternalID`] = id;
+        if (settings.TransactionItemsScopeFilterID) {
+            filter[`internalID`] = settings.TransactionItemsScopeFilterID;
         }
         let res = await this.importedService.callToPapi(
             "POST",
@@ -299,6 +281,7 @@ export class ImportAtdComponent implements OnInit {
     }
 
     async onOkWebhooksClicked() {
+        this.isCallbackWebhokksFinish = false;
         debugger;
         let dynamoWebhooks = {};
         this.webhooks.forEach((webhook) => {
@@ -329,7 +312,7 @@ export class ImportAtdComponent implements OnInit {
             }
         });
 
-        this.importedService.callToServerAPI(
+        await this.importedService.callToServerAPI(
             "upsert_to_dynamo",
             "POST",
             { table: `importExportATD` },
@@ -338,7 +321,8 @@ export class ImportAtdComponent implements OnInit {
                 Value: dynamoWebhooks,
             }
         );
-        this.callToImportATD();
+        await this.callToImportATD();
+        //this.isCallbackWebhokksFinish = true;
     }
 
     private async callToImportATD() {
@@ -366,6 +350,12 @@ export class ImportAtdComponent implements OnInit {
             )
             .then(
                 (res: any) => {
+                    if (!this.isCallbackWebhokksFinish) {
+                        this.isCallbackWebhokksFinish = true;
+                    }
+                    if (!this.isCallbackConflictsFinish) {
+                        this.isCallbackConflictsFinish = true;
+                    }
                     if (res == "success") {
                         const title = this.translate.instant(
                             "Import_Export_Success"
@@ -373,7 +363,6 @@ export class ImportAtdComponent implements OnInit {
                         const content = this.translate.instant(
                             "Import_Finished_Succefully"
                         );
-                        debugger;
                         this.appService.openDialog(title, content, () => {
                             window.location.reload();
                         });
@@ -396,28 +385,23 @@ export class ImportAtdComponent implements OnInit {
     private deleteContentFromMap() {
         this.referenceMap.Mapping.forEach((pair) => {
             // The content of the webhook reference should be sent in order to fix the workflow's actions
-            if (
-                pair.Destination &&
-                pair.Destination.Type !==
-                    ReferenceType.toString(ReferenceType.Webhook)
-            ) {
+            if (pair.Destination && pair.Destination.Type !== "webhook") {
                 delete pair.Destination.Content;
                 delete pair.Origin.Content;
             }
         });
         this.referenceMap.Mapping.forEach((pair) => {
-            if (
-                pair.Destination &&
-                pair.Destination.Type !==
-                    ReferenceType.toString(ReferenceType.Webhook)
-            ) {
+            if (pair.Destination && pair.Destination.Type !== "webhook") {
                 delete pair.Destination.Path;
                 delete pair.Origin.Path;
             }
         });
     }
 
-    async onCancelClicked() {}
+    async onCancelClicked() {
+        this.showConflictResolution = false;
+        this.showWebhooksResolution = false;
+    }
 
     selectedRowsChanged(selectedRowsCount) {
         const selectData = selectedRowsCount.componentRef.instance.getSelectedItemsData(
@@ -447,6 +431,8 @@ export class ImportAtdComponent implements OnInit {
     }
 
     async importAtd() {
+        this.isCallbackImportFinish = false;
+        this.webhooks = [];
         try {
             await this.importedService
                 .getTypeOfSubType(this.selectedActivity)
@@ -508,33 +494,36 @@ export class ImportAtdComponent implements OnInit {
                                     // according to Eyal's request to not showing transactionItemScope
 
                                     let conflictNum = this.conflictsList.filter(
-                                        (x) =>
-                                            x.Object !=
-                                            ReferenceType.toString(
-                                                ReferenceType.Filter
-                                            )
+                                        (x) => x.Object != "filter"
                                     ).length;
                                     if (this.conflictsList && conflictNum > 0) {
-                                        this.showWebhooksResolution = false;
-                                        this.showConflictResolution = true;
+                                        this.fillResolutionFromDynamo().then(
+                                            () => {
+                                                this.isCallbackImportFinish = true;
 
-                                        setTimeout(() => {
-                                            window.dispatchEvent(
-                                                new Event("resize")
-                                            );
-                                        }, 5);
-                                        this.loadConflictlist();
+                                                this.showWebhooksResolution = false;
+                                                this.showConflictResolution = true;
+                                                setTimeout(() => {
+                                                    window.dispatchEvent(
+                                                        new Event("resize")
+                                                    );
+                                                }, 1);
+                                                this.loadConflictlist();
+                                            }
+                                        );
                                     } else if (this.webhooks.length > 0) {
                                         this.showWebhooks();
+                                        this.isCallbackImportFinish = true;
                                     } else {
-                                        this.callToImportATD();
+                                        await this.callToImportATD();
                                     }
                                 });
                             } else {
-                                this.callToImportATD();
+                                await this.callToImportATD();
                             }
                         });
                 });
+            //this.isCallbackImportFinish = true;
         } catch {}
     }
 
@@ -564,7 +553,7 @@ export class ImportAtdComponent implements OnInit {
         this.conflictsList.forEach((c) => {
             const val = resolutionFromDynmo[0]?.Value[c.ID];
             if (val) {
-                c.Resolution = ResolutionOption.toString(val);
+                c.Resolution = val;
             }
         });
     }
@@ -593,14 +582,12 @@ export class ImportAtdComponent implements OnInit {
         if (unresolvedConflicts.length > 0) {
             let content = "";
             unresolvedConflicts.forEach((c) => {
-                if (
-                    c.Type ===
-                    ReferenceType.toString(ReferenceType.TypeDefinition)
-                ) {
+                if (c.Type === "type_definition") {
+                    const type = this.getStringTypeFromObjectType(c.SubType);
                     content +=
-                        `${c.Name} ${this.translate.instant(
-                            "Activity_Transaction_Not_Found"
-                        )}` + "<br/>";
+                        `${this.translate.instant(type)}: '${
+                            c.Name
+                        }' ${this.translate.instant("Not_Found")}` + "<br/>";
                 } else {
                     content +=
                         `${c.Name} ${c.Type} ${this.translate.instant(
@@ -621,7 +608,7 @@ export class ImportAtdComponent implements OnInit {
         referenceMap: References,
         unresolvedConflicts: Reference[]
     ) {
-        if (ref.Type !== ReferenceType.toString(ReferenceType.Webhook)) {
+        if (ref.Type !== "webhook") {
             let referencedPair: Mapping = referenceMap.Mapping.find(
                 (pair) => pair.Origin.Name === ref.Name
             );
@@ -630,22 +617,15 @@ export class ImportAtdComponent implements OnInit {
                     // For objects with a path (such as custom form),
                     // if a matching object does not exist, then continue (create this object in the Execution step).
                     if (
-                        ref.Type ===
-                            ReferenceType.toString(ReferenceType.FileStorage) ||
-                        ref.Type ===
-                            ReferenceType.toString(
-                                ReferenceType.UserDefinedTable
-                            ) ||
-                        ref.Type ===
-                            ReferenceType.toString(ReferenceType.Filter)
+                        ref.Type === "file_storage" ||
+                        ref.Type === "user_defined_table" ||
+                        ref.Type === "filter"
                     ) {
                         const conflict: Conflict = {
                             Name: ref.Name,
                             Object: referencedPair.Origin.Type,
-                            Status: this.translate.instant("Object_Not_Found"),
-                            Resolution: ResolutionOption.toString(
-                                ResolutionOption.CreateNew
-                            ),
+                            Status: "NotFound",
+                            Resolution: "CreateNew",
                             UUID: Guid.newGuid(),
                             ID: ref.ID,
                             // this.resolutionOptions,
@@ -663,10 +643,7 @@ export class ImportAtdComponent implements OnInit {
                     referencedPair.Origin.Name ===
                     referencedPair.Destination.Name
                 ) {
-                    if (
-                        ref.Type ===
-                        ReferenceType.toString(ReferenceType.FileStorage)
-                    ) {
+                    if (ref.Type === "file_storage") {
                         const filesAreSame = await this.compareFileContentOfOriginAndDest(
                             referencedPair.Origin,
                             referencedPair.Destination
@@ -674,16 +651,8 @@ export class ImportAtdComponent implements OnInit {
                         if (!filesAreSame) {
                             const conflict: Conflict = {
                                 Name: referencedPair.Destination.Name,
-                                Object: ReferenceType.toString(
-                                    referencedPair.Destination.Type
-                                ),
-                                Status: `${this.translate.instant(
-                                    "File_Named"
-                                )} ${
-                                    referencedPair.Destination.Name
-                                } ${this.translate.instant(
-                                    "Exists_With_Different_Content"
-                                )}`,
+                                Object: referencedPair.Destination.Type,
+                                Status: "ExistsWithDifferentContent",
                                 Resolution: null,
                                 UUID: Guid.newGuid(),
                                 ID: referencedPair.Destination.ID,
@@ -705,6 +674,15 @@ export class ImportAtdComponent implements OnInit {
         }
     }
 
+    getStringTypeFromObjectType(type: string) {
+        if (type === ObjectType.toString(ObjectType.accounts)) {
+            return "AccountType";
+        } else if (type === ObjectType.toString(ObjectType.transactions)) {
+            return "TransactionType";
+        } else if (type === ObjectType.toString(ObjectType.activities)) {
+            return "ActivityType";
+        }
+    }
     async compareFileContentOfOriginAndDest(
         origin: Reference,
         destinition: Reference
@@ -769,19 +747,36 @@ export class ImportAtdComponent implements OnInit {
                 (x) => x.UUID === event.Id
             );
             this.conflictsList[objectOndex].Resolution = event.Value;
+            this.validateConflictButtonEnabled();
         } else if (this.showWebhooksResolution) {
             let objectOndex = this.webhooks.findIndex(
                 (x) => x.UUID === event.Id
             );
-            if (event.ApiName === "Secret key") {
+            if (event.ApiName === "Object_WebhookSecretKeyColumn") {
                 this.webhooks[objectOndex].SecretKey = event.Value;
-            } else if (event.ApiName === "Web service URL") {
+            } else if (event.ApiName === "Object_WebhookUrlColumn") {
                 this.webhooks[objectOndex].Url = event.Value;
             }
         }
     }
 
+    private validateConflictButtonEnabled() {
+        if (
+            this.conflictsList.filter(
+                (x) => x.Resolution === this.translate.instant("LIST.NONE")
+            ).length > 0
+        ) {
+            this.disableConflictButton = true;
+        } else {
+            this.disableConflictButton = false;
+        }
+    }
+
     loadConflictlist() {
+        console.log(
+            `in loadConflictlist. this.conflictsList.length: ${this.conflictsList.length}`
+        );
+        this.validateConflictButtonEnabled();
         this.loadConflictList(this.conflictsList);
     }
 
@@ -789,22 +784,11 @@ export class ImportAtdComponent implements OnInit {
         if (this.customConflictList && conflicts) {
             const tableData = new Array<PepRowData>();
             conflicts.forEach((conflict: Conflict) => {
-                if (
-                    conflict.Object ==
-                    ReferenceType.toString(ReferenceType.Filter)
-                ) {
+                if (conflict.Object == "filter") {
                     return;
                 }
-                const userKeys = [
-                    this.translate.instant("Object_ConflictResolutionColumn"),
-                    this.translate.instant("Name_ConflictResolutionColumn"),
-                    this.translate.instant("Status_ConflictResolutionColumn"),
-                ];
-                const supportUserKeys = [
-                    this.translate.instant(
-                        "Resolution_ConflictResolutionColumn"
-                    ),
-                ];
+                const userKeys = ["Object", "Name", "Status"];
+                const supportUserKeys = ["Resolution"];
                 const allKeys = [...userKeys, ...supportUserKeys];
                 tableData.push(
                     this.convertConflictToPepRowData(conflict, allKeys)
@@ -816,6 +800,7 @@ export class ImportAtdComponent implements OnInit {
             );
             const buffer = [];
             if (pepperiListObj.Rows) {
+                console.log(`Rows number: ${pepperiListObj.Rows.length}`);
                 pepperiListObj.Rows.map((row, i) => {
                     row.UID = conflicts[i].UUID || row.UID;
                     const osd = new ObjectSingleData(
@@ -848,75 +833,96 @@ export class ImportAtdComponent implements OnInit {
         return row;
     }
 
-    initDataRowFieldOfConflicts(addon: any, key: any): PepFieldData {
+    initDataRowFieldOfConflicts(conflict: Conflict, key: any): PepFieldData {
         const dataRowField: PepFieldData = {
             ApiName: key,
             Title: this.translate.instant(key),
             XAlignment: X_ALIGNMENT_TYPE.Left,
-            FormattedValue: addon[key] ? addon[key].toString() : "",
-            Value: addon[key] ? addon[key].toString() : "",
+            FormattedValue: conflict[key] ? conflict[key] : "",
+            Value: conflict[key] ? conflict[key] : "",
             ColumnWidth: 10,
             AdditionalValue: "",
             OptionalValues: [],
             FieldType: FIELD_TYPE.TextBox,
             Enabled:
-                key === `Resolution` &&
-                addon[key] !=
-                    ResolutionOption.toString(ResolutionOption.CreateNew)
+                key === `Resolution` && conflict.Resolution != "CreateNew"
                     ? true
                     : false,
         };
         switch (key) {
             case "Object":
-                const addonType = addon.Object && addon[key] ? addon[key] : "";
-                dataRowField.FormattedValue = addonType;
-                dataRowField.AdditionalValue = dataRowField.Value = addonType;
+                dataRowField.ColumnWidth = 20;
+
+                dataRowField.FormattedValue = dataRowField.Value = this.translate.instant(
+                    conflict[key]
+                );
+
                 break;
             case "Name":
                 dataRowField.ColumnWidth = 15;
-                dataRowField.AdditionalValue = addon.Name;
-                dataRowField.FormattedValue = addon[key] ? addon[key] : "";
-                dataRowField.Value = addon[key] ? addon[key] : "";
+                dataRowField.AdditionalValue = conflict.Name;
+                dataRowField.FormattedValue = conflict.Name
+                    ? conflict.Name
+                    : "";
+                dataRowField.Value = conflict.Name ? conflict.Name : "";
                 break;
             case "Status":
                 dataRowField.ColumnWidth = 25;
-                dataRowField.AdditionalValue = addon.Status;
-                dataRowField.FormattedValue = addon[key] ? addon[key] : "";
-                dataRowField.Value = addon[key] ? addon[key] : "";
+                dataRowField.AdditionalValue = conflict.Status;
+                const status = this.getStatusValue(conflict);
+
+                dataRowField.FormattedValue = status;
+                dataRowField.Value = status;
                 break;
 
             case "Resolution":
                 dataRowField.ColumnWidth = 15;
                 dataRowField.FieldType = FIELD_TYPE.ComboBox;
-                dataRowField.FormattedValue = addon[key];
-                dataRowField.Value = addon[key];
+                if (conflict.Resolution === "CreateNew") {
+                    dataRowField.FormattedValue = dataRowField.Value = this.translate.instant(
+                        conflict.Resolution
+                    );
+                }
+                if (!conflict.Resolution) {
+                    dataRowField.FormattedValue = dataRowField.Value = this.translate.instant(
+                        "UseExisting"
+                    );
+                }
                 dataRowField.OptionalValues = [
                     {
-                        Key: ResolutionOption.toString(
-                            ResolutionOption.UseExisting
-                        ),
-                        Value: this.translate[
-                            "Conflict_Resolution_Type_UseExist"
-                        ],
+                        Key: "UseExisting",
+                        Value: this.translate.instant("UseExisting"),
                     },
                     {
-                        Key: ResolutionOption.toString(
-                            ResolutionOption.OverwriteExisting
-                        ),
-                        Value: this.translate[
-                            "Conflict_Resolution_Type_Owerwrite"
-                        ],
+                        Key: "OverwriteExisting",
+                        Value: this.translate.instant("OverwriteExisting"),
                     },
                 ];
                 break;
 
             default:
-                dataRowField.FormattedValue = addon[key]
-                    ? addon[key].toString()
+                dataRowField.FormattedValue = conflict[key]
+                    ? conflict[key].toString()
                     : "";
                 break;
         }
         return dataRowField;
+    }
+
+    private getStatusValue(conflict: Conflict) {
+        let resValue = "";
+        switch (conflict.Status) {
+            case "NotFound":
+                resValue = this.translate.instant("Object_Not_Found");
+
+                break;
+            case "ExistsWithDifferentContent":
+                resValue = `${this.translate.instant("File_Named")} ${
+                    conflict.Name
+                } ${this.translate.instant("Exists_With_Different_Content")}`;
+                break;
+        }
+        return resValue;
     }
 
     //#endregion
@@ -932,8 +938,8 @@ export class ImportAtdComponent implements OnInit {
             const tableData = new Array<PepRowData>();
             webhooks.forEach((webhook: any) => {
                 const allKeys = [
-                    this.translate.instant("Object_WebhookUrlColumn"),
-                    this.translate.instant("Object_WebhookSecretKeyColumn"),
+                    "Object_WebhookUrlColumn",
+                    "Object_WebhookSecretKeyColumn",
                 ];
                 tableData.push(
                     this.convertWebhookToPepRowData(webhook, allKeys)
@@ -990,13 +996,13 @@ export class ImportAtdComponent implements OnInit {
             Enabled: true,
         };
         switch (key) {
-            case "Web service URL":
+            case "Object_WebhookUrlColumn":
                 dataRowField.ColumnWidth = 30;
                 dataRowField.FormattedValue = webhook.Url ? webhook.Url : "";
                 dataRowField.Value = webhook.Url ? webhook.Url : "";
 
                 break;
-            case "Secret key":
+            case "Object_WebhookSecretKeyColumn":
                 dataRowField.ColumnWidth = 20;
                 dataRowField.FormattedValue = webhook.SecretKey
                     ? webhook.SecretKey

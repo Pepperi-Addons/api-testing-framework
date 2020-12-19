@@ -18,7 +18,7 @@ export class ImportAtdService {
     accessToken = "";
     parsedToken: any;
     papiBaseURL = "";
-    pluginUUID = `d9999883-ef9a-4295-99db-2f1d3fc34af6`;
+    pluginUUID = `e9029d7f-af32-4b0e-a513-8d9ced6f8186`;
     exportedAtdstring: string;
     exportedAtd: ActivityTypeDefinition;
 
@@ -54,6 +54,7 @@ export class ImportAtdService {
             return this.appService.postPapiCall(url, body).toPromise();
         }
     }
+
     getTypeOfSubType(subtypeid: string) {
         return this.appService.getPapiCall(`/types/${subtypeid}`);
     }
