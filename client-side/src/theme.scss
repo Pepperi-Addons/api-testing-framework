@@ -10,5 +10,3 @@ $pepperi-theme: get-pepperi-theme();
 body {
     @include addon-theme($pepperi-theme);
 }
-
-

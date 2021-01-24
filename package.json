@@ -5,18 +5,16 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "cd ./server-side && npm run build && cd .. && cd ./client-side && npm run build:single-spa:client-side && cd ..",
+    "build": "cd ./server-side && npm run build && cd .. && cd ./client-side && npm run build:single-spa && cd ..",
     "init": "npm install && cd ./server-side && npm install && cd .. && cd ./client-side && npm install && cd ..",
-    "publish-addon": "npm run build && publish-addon",
-    "pub-addon": "publish-addon"
+    "client:addon": "cd client-side && ng serve --port 4400 --configuration SingleSpa && cd..",
+    "client:standalone": "cd client-side && ng serve --port 4400 --configuration Standalone && cd..",
+    "publish-addon": "npm run build && publish-addon"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@pepperi-addons/ngx-lib": "^0.1.58",
-    "@pepperi-addons/papi-sdk": "^1.17.3",
-    "@pepperi-addons/scripts": "^1.0.27",
-    "@types/node-fetch": "^2.5.7"
+    "@pepperi-addons/scripts": "^1.0.27"
   }
 }
