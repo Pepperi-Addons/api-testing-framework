@@ -35,7 +35,10 @@ export interface MetaDataUDT {
     CreationDateTime?: string;
     ModificationDateTime?: string;
     Hidden?: boolean;
-    MemoryMode?: Record<string, unknown>;
+    MemoryMode?: {
+        Dormant?: boolean;
+        Volatile?: boolean;
+    };
 }
 
 interface FindOptions {
@@ -80,6 +83,10 @@ export class ImportExportATDService {
         return this.papiClient.get(`/meta_data/${'activities' as ResourceTypes}/types${subTypeID}`);
     }
 
+    getAllActivitiesATD() {
+        return this.papiClient.get(`/meta_data/${'activities' as ResourceTypes}/types`);
+    }
+
     exportATD(type: ResourceTypes, subtype: number) {
         return this.papiClient.get(
             `/addons/api/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/export_type_definition?type=${type}&subtype=${subtype}`,
@@ -90,6 +97,13 @@ export class ImportExportATDService {
         return this.papiClient.post(
             '/addons/api/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/build_references_mapping',
             references,
+        );
+    }
+
+    importATD(type: ResourceTypes, subtype: number, body) {
+        return this.papiClient.post(
+            `/addons/api/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/import_type_definition?type=${type}&subtype=${subtype}`,
+            body,
         );
     }
 
@@ -107,6 +121,9 @@ export class ImportExportATDService {
     }
 
     deleteUDT(tableID: string) {
-        return this.papiClient.delete(`/meta_data/${'user_defined_tables' as ResourceTypes}/${tableID}`);
+        return this.papiClient
+            .delete(`/meta_data/${'user_defined_tables' as ResourceTypes}/${tableID}`)
+            .then((res) => res.text())
+            .then((res) => (res ? JSON.parse(res) : ''));
     }
 }
