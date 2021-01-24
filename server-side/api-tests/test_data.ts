@@ -6,6 +6,8 @@ const installedAddons = {
     'Data Views API': '' as any,
     'Addons Manager': '' as any,
     'Cross Platforms API': '' as any,
+    'Settings Framework': '' as any,
+    ADAL: '' as any,
 };
 
 // Get the Tests Data
@@ -28,6 +30,10 @@ export async function TestDataTest(generalService: GeneralService, tester: Teste
                 installedAddons['Addons Manager'] = installedAddonsArr[index].Version;
             if (installedAddonsArr[index].Addon.Name == 'Cross Platforms API')
                 installedAddons['Cross Platforms API'] = installedAddonsArr[index].Version;
+            if (installedAddonsArr[index].Addon.Name == 'Settings Framework')
+                installedAddons['Settings Framework'] = installedAddonsArr[index].Version;
+            if (installedAddonsArr[index].Addon.Name == 'ADAL')
+                installedAddons['ADAL'] = installedAddonsArr[index].Version;
         }
     }
 
@@ -56,11 +62,17 @@ export async function TestDataTest(generalService: GeneralService, tester: Teste
             it(`WebApp Platform | Version: ${installedAddons['WebApp Platform']}`, () => {
                 expect(installedAddons['WebApp Platform']).to.not.be.null;
             });
+            it(`Settings Framework | Version: ${installedAddons['Settings Framework']}`, () => {
+                expect(installedAddons['Settings Framework']).to.not.be.null;
+            });
             it(`Addons Manager | Version: ${installedAddons['Addons Manager']}`, () => {
                 expect(installedAddons['Addons Manage']).to.not.be.null;
             });
             it(`Data Views API | Version: ${installedAddons['Data Views API']}`, () => {
                 expect(installedAddons['Data Views API']).to.not.be.null;
+            });
+            it(`ADAL | Version: ${installedAddons['ADAL']}`, () => {
+                expect(installedAddons['ADAL']).to.not.be.null;
             });
         });
     });

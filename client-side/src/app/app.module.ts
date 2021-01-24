@@ -1,27 +1,32 @@
-import { BrowserModule } from "@angular/platform-browser";
-import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
+import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
-import { NgModule } from "@angular/core";
+import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from "./app-routing.module";
-import { AppComponent } from "./app.component";
-import { PepUIModule } from "./modules/pepperi.module";
-import { MaterialModule } from "./modules/material.module";
-import { ImportAtdComponent } from "./import-atd/import-atd.component";
-import { ExportAtdComponent } from "./export-atd/export-atd.component";
-import { OrenPlaygroundComponent } from "./oren-playground/oren-playground.component";
-import { ApiTesterComponent } from "./api-tester/api-tester.component";
+import { AppRoutingModule } from './app.routes';
+import { AppComponent } from './app.component';
+import { PepUIModule } from './modules/pepperi.module';
+import { MaterialModule } from './modules/material.module';
+import { AddonModule } from './components/addon/addon.module';
+import { ApiTesterModule } from './components/api-tester/api-tester.module';
+import { ExperimentModule } from './components/experiment/experiment.module';
 
 @NgModule({
-    declarations: [AppComponent, ImportAtdComponent, ExportAtdComponent, OrenPlaygroundComponent, ApiTesterComponent],
+    declarations: [
+        AppComponent,
+    ],
     imports: [
         BrowserModule,
         BrowserAnimationsModule,
         AppRoutingModule,
         PepUIModule,
         MaterialModule,
+        AddonModule,
+        ApiTesterModule,
+        ExperimentModule
     ],
     providers: [],
-    bootstrap: [AppComponent],
+    bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}

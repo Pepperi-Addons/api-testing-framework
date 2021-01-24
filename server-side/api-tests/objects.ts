@@ -317,18 +317,263 @@ export async function ObjectsTests(generalService: GeneralService, tester: Teste
         },
     ];
 
+    const transactionLineTSAarr: ApiFieldObject[] = [
+        {
+            FieldID: 'TSACheckboxAPI',
+            Label: 'CheckboxAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 10,
+                Name: 'Boolean',
+            },
+            Type: 'Boolean',
+            Format: 'Boolean',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {
+                CheckBoxTrueValue: 'true',
+                CheckBoxFalseValue: 'false',
+            },
+        },
+        {
+            FieldID: 'TSACurrencyAPI',
+            Label: 'CurrencyAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 9,
+                Name: 'Currency',
+            },
+            Type: 'Number',
+            Format: 'Double',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {},
+        },
+        {
+            FieldID: 'TSADateAPI',
+            Label: 'DateAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 5,
+                Name: 'Date',
+            },
+            Type: 'String',
+            Format: 'DateTime',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {},
+        },
+        {
+            FieldID: 'TSADateTimeAPI',
+            Label: 'DateTimeAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 6,
+                Name: 'DateAndTime',
+            },
+            Type: 'String',
+            Format: 'DateTime',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {},
+        },
+        {
+            FieldID: 'TSADecimalNumberAPI',
+            Label: 'DecimalNumberAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 8,
+                Name: 'NumberReal',
+            },
+            Type: 'Number',
+            Format: 'Double',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {
+                DecimalScale: 2,
+            },
+        },
+        {
+            FieldID: 'TSADropdownAPI',
+            Label: 'DropdownAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 11,
+                Name: 'ComboBox',
+            },
+            Type: 'String',
+            Format: 'String',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {
+                PicklistValues: ['1', '2', '3', '4', '5'],
+            },
+        },
+        {
+            FieldID: 'TSAEmailAPI',
+            Label: 'EmailAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 18,
+                Name: 'Email',
+            },
+            Type: 'String',
+            Format: 'String',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {},
+        },
+        {
+            FieldID: 'TSAHtmlAPI',
+            Label: 'HtmlAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 56,
+                Name: 'RichTextHTML',
+            },
+            Type: 'String',
+            Format: 'String',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {},
+        },
+        {
+            FieldID: 'TSALimitedLineAPI',
+            Label: 'LimitedLineAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 2,
+                Name: 'LimitedLengthTextBox',
+            },
+            Type: 'String',
+            Format: 'String',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {
+                StringLength: 10,
+            },
+        },
+        {
+            FieldID: 'TSALinkAPI',
+            Label: 'LinkAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 26,
+                Name: 'Link',
+            },
+            Type: 'String',
+            Format: 'String',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {
+                readOnlyDisplayValue: '',
+            },
+        },
+        {
+            FieldID: 'TSAMultiChoiceAPI',
+            Label: 'MultiChoiceAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 12,
+                Name: 'MultiTickBox',
+            },
+            Format: 'String[]',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {
+                PicklistValues: ['A', 'B', 'C', 'D'],
+            },
+        },
+        {
+            FieldID: 'TSANumberAPI',
+            Label: 'NumberAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 7,
+                Name: 'NumberInetger',
+            },
+            Type: 'Integer',
+            Format: 'Int64',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {},
+        },
+        {
+            FieldID: 'TSAParagraphAPI',
+            Label: 'ParagraphAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 3,
+                Name: 'TextArea',
+            },
+            Type: 'String',
+            Format: 'String',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {},
+        },
+        {
+            FieldID: 'TSASingleLineAPI',
+            Label: 'SingleLineAPI',
+            Description: '',
+            IsUserDefinedField: true,
+            UIType: {
+                ID: 1,
+                Name: 'TextBox',
+            },
+            Type: 'String',
+            Format: 'String',
+            Hidden: false,
+            UserDefinedTableSource: null,
+            CalculatedRuleEngine: null,
+            TypeSpecificFields: {},
+        },
+    ];
+
     //#endregion Array of TSAs
 
-    describe('Objects Tests Suites', () => {
+    describe('Objects Test Suites', () => {
         describe('Accounts', () => {
-            it('CRUD', async () => {
-                const createdTSAs = await service.createBulkTSA('accounts', TSAarr);
+            let createdTSAs;
+            let accountExternalID;
+            let updatedAccount;
+            let createdAccount;
+
+            it('Create TSAs for account CRUD', async () => {
+                createdTSAs = await service.createBulkTSA('accounts', TSAarr);
                 console.log('The following fields created:\n' + createdTSAs);
-                const accountExternalID: string = 'Automated API ' + Math.floor(Math.random() * 1000000).toString();
+            });
 
-                let updatedAccount;
+            it('Create account', async () => {
+                accountExternalID = 'Automated API ' + Math.floor(Math.random() * 1000000).toString();
 
-                const createdAccount = await service.createAccount({
+                createdAccount = await service.createAccount({
                     ExternalID: accountExternalID,
                     City: 'City',
                     Country: 'US',
@@ -430,7 +675,11 @@ export async function ObjectsTests(generalService: GeneralService, tester: Teste
                     expect(getCreatedAccount[0].TSAImageAPI.URL).to.include('stock-photography-slider.jpg'),
                     expect(getCreatedAccount[0].TSASignatureAPI.URL).to.include('sign2.png'),
                     expect(getCreatedAccount[0].TSAAttachmentAPI.URL).to.include('sample.pdf'),
+                ]);
+            });
 
+            it('Update account', async () => {
+                return Promise.all([
                     expect(
                         (updatedAccount = await service.createAccount({
                             ExternalID: accountExternalID,
@@ -525,17 +774,24 @@ export async function ObjectsTests(generalService: GeneralService, tester: Teste
                         TSAPhoneNumberAPI: '972555432512',
                         TSASingleLineAPI: 'Random TEXT',
                     }),
-
                     expect(updatedAccount.TSAImageAPI.URL).to.include('image-human-brain_99433-298.jpg'),
                     expect(updatedAccount.TSASignatureAPI.URL).to.include('platt_rogers_spencer_signature.png'),
                     expect(updatedAccount.TSAAttachmentAPI.URL).to.include('dummy.pdf'),
+                ]);
+            });
+
+            it('Delete account', async () => {
+                return Promise.all([
                     expect(await service.deleteAccount(createdAccount.InternalID as any)).to.be.true,
                     expect(await service.deleteAccount(createdAccount.InternalID as any)).to.be.false,
                     expect(await service.getAccounts({ where: `InternalID=${createdAccount.InternalID}` }))
                         .to.be.an('array')
                         .with.lengthOf(0),
-                    expect(createdTSAs.length == (await service.deleteBulkTSA('accounts', TSAarr)).length).to.be.true,
                 ]);
+            });
+
+            it('Delete account TSAs', async () => {
+                expect(createdTSAs.length == (await service.deleteBulkTSA('accounts', TSAarr)).length).to.be.true;
             });
 
             // it('Delete Account Message (DI-17285)', async () => {
@@ -555,6 +811,869 @@ export async function ObjectsTests(generalService: GeneralService, tester: Teste
             //             (),
             //     ]);
             // });
+        });
+
+        describe('Contacts', () => {
+            let contactAccount;
+            let updatedContact;
+            let contactTSAs;
+            let contactExternalID;
+            let createdContact;
+
+            it('Create account and TSAs for contact CRUD', async () => {
+                contactAccount = await service.createAccount({
+                    ExternalID: 'ContactTestAccount',
+                    Name: 'Contact Test Account',
+                });
+                contactTSAs = await service.createBulkTSA('contacts', TSAarr);
+                console.log('The following fields were created:\n' + contactTSAs);
+            });
+
+            it('Create contact', async () => {
+                contactExternalID = 'Automated API ' + Math.floor(Math.random() * 1000000).toString();
+                createdContact = await service.createContact({
+                    ExternalID: contactExternalID,
+                    Email: 'ContactTest@mail.com',
+                    Phone: '123-45678',
+                    Mobile: '123-45678',
+                    FirstName: 'Contact',
+                    LastName: 'Test',
+                    Account: {
+                        Data: {
+                            InternalID: contactAccount.InternalID,
+                        },
+                    },
+                    TSAAttachmentAPI: {
+                        URL: 'http://www.africau.edu/images/default/sample.pdf',
+                        Content: '',
+                    },
+                    TSACheckboxAPI: true,
+                    TSACurrencyAPI: 10.0,
+                    TSADateAPI: '2020-09-01Z',
+                    TSADateTimeAPI: '2020-08-31T21:00:00Z',
+                    TSADecimalNumberAPI: 5.5,
+                    TSADropdownAPI: '1',
+                    TSAEmailAPI: 'Test@test.com',
+                    TSAHtmlAPI: '<h1>My First Heading</h1>\r\n<p>My first paragraph.</p>',
+                    TSAImageAPI: {
+                        URL:
+                            'https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/stock-photography-slider.jpg',
+                        Content: '',
+                    },
+                    TSALimitedLineAPI: 'Limit text',
+                    TSALinkAPI: 'https://www.ynet.co.il',
+                    TSAMultiChoiceAPI: 'A',
+                    TSANumberAPI: 5,
+                    TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze',
+                    TSAPhoneNumberAPI: '9725554325',
+                    TSASignatureAPI: {
+                        URL: 'https://capitalstars.com/qpay/assets/images/sign2.png',
+                        Content: '',
+                    },
+                    TSASingleLineAPI: 'Random text',
+                });
+
+                const getCreatedContact = await service.getContacts(createdContact.InternalID);
+
+                return Promise.all([
+                    expect(getCreatedContact[0]).to.include({
+                        ExternalID: contactExternalID,
+                        Email: 'ContactTest@mail.com',
+                        Phone: '123-45678',
+                        Mobile: '123-45678',
+                        FirstName: 'Contact',
+                        LastName: 'Test',
+                        Status: 2,
+                        TSACheckboxAPI: true,
+                        TSACurrencyAPI: 10.0,
+                        TSADateAPI: '2020-09-01Z',
+                        TSADateTimeAPI: '2020-08-31T21:00:00Z',
+                        TSADecimalNumberAPI: 5.5,
+                        TSADropdownAPI: '1',
+                        TSAEmailAPI: 'Test@test.com',
+                        TSAHtmlAPI: '<h1>My First Heading</h1>\r\n<p>My first paragraph.</p>',
+                        TSALimitedLineAPI: 'Limit text',
+                        TSALinkAPI: 'https://www.ynet.co.il',
+                        TSAMultiChoiceAPI: 'A',
+                        TSANumberAPI: 5,
+                        TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze',
+                        TSAPhoneNumberAPI: '9725554325',
+                        TSASingleLineAPI: 'Random text',
+                    }),
+                    expect(getCreatedContact[0].TSAImageAPI.URL).to.include('stock-photography-slider.jpg'),
+                    expect(getCreatedContact[0].TSASignatureAPI.URL).to.include('sign2.png'),
+                    expect(getCreatedContact[0].TSAAttachmentAPI.URL).to.include('sample.pdf'),
+                    expect(JSON.stringify(getCreatedContact[0].Account)).equals(
+                        JSON.stringify({
+                            Data: {
+                                InternalID: contactAccount.InternalID,
+                                UUID: contactAccount.UUID,
+                                ExternalID: contactAccount.ExternalID,
+                            },
+                            URI: '/accounts/' + contactAccount.InternalID,
+                        }),
+                    ),
+                ]);
+            });
+
+            it('Update contact', async () => {
+                return Promise.all([
+                    expect(
+                        (updatedContact = await service.createContact({
+                            ExternalID: contactExternalID,
+                            Email: 'ContactUpdateTest@mail.com',
+                            Phone: '123-456789',
+                            Mobile: '123-456789',
+                            FirstName: 'Contact Update',
+                            LastName: 'Test Update',
+                            TSAAttachmentAPI: {
+                                URL: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                                Content: '',
+                            },
+                            TSACheckboxAPI: false,
+                            TSACurrencyAPI: 15.0,
+                            TSADateAPI: '2020-09-02Z',
+                            TSADateTimeAPI: '2020-07-31T21:00:00Z',
+                            TSADecimalNumberAPI: 6.2,
+                            TSADropdownAPI: '2',
+                            TSAEmailAPI: 'TestUpdate@test.com',
+                            TSAHtmlAPI: '<h1>My First Updated Heading</h1>\r\n<p>My first paragraph.</p>',
+                            TSAImageAPI: {
+                                URL: 'https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg',
+                                Content: '',
+                            },
+                            TSALimitedLineAPI: 'Update text',
+                            TSALinkAPI: 'https://www.mako.co.il',
+                            TSAMultiChoiceAPI: 'B',
+                            TSANumberAPI: 3,
+                            TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze\r\nUpdate',
+                            TSAPhoneNumberAPI: '97255543251',
+                            TSASignatureAPI: {
+                                URL:
+                                    'https://upload.wikimedia.org/wikipedia/commons/9/92/Platt_Rogers_Spencer_signature.png',
+                                Content: '',
+                            },
+                            TSASingleLineAPI: 'Random Updated text',
+                        } as any)),
+                    ).to.be.include({
+                        ExternalID: contactExternalID,
+                        Email: 'ContactUpdateTest@mail.com',
+                        Phone: '123-456789',
+                        Mobile: '123-456789',
+                        FirstName: 'Contact Update',
+                        LastName: 'Test Update',
+                        TSACheckboxAPI: false,
+                        TSACurrencyAPI: 15.0,
+                        TSADateAPI: '2020-09-02Z',
+                        TSADateTimeAPI: '2020-07-31T21:00:00Z',
+                        TSADecimalNumberAPI: 6.2,
+                        TSADropdownAPI: '2',
+                        TSAEmailAPI: 'TestUpdate@test.com',
+                        TSAHtmlAPI: '<h1>My First Updated Heading</h1>\r\n<p>My first paragraph.</p>',
+                        TSALimitedLineAPI: 'Update text',
+                        TSALinkAPI: 'https://www.mako.co.il',
+                        TSAMultiChoiceAPI: 'B',
+                        TSANumberAPI: 3,
+                        TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze\r\nUpdate',
+                        TSAPhoneNumberAPI: '97255543251',
+                        TSASingleLineAPI: 'Random Updated text',
+                    }),
+                    expect(updatedContact.TSAImageAPI.URL).to.include('image-human-brain_99433-298.jpg'),
+                    expect(updatedContact.TSASignatureAPI.URL).to.include('platt_rogers_spencer_signature.png'),
+                    expect(updatedContact.TSAAttachmentAPI.URL).to.include('dummy.pdf'),
+                ]);
+            });
+
+            it('Delete contact', async () => {
+                return Promise.all([
+                    expect(await service.deleteContact(createdContact.InternalID as any)).to.be.true,
+                    expect(await service.deleteContact(createdContact.InternalID as any)).to.be.false,
+                    expect(await service.getContacts(createdContact.InternalID))
+                        .to.be.an('array')
+                        .with.lengthOf(0),
+                ]);
+            });
+
+            it('Delete contact test account and TSAs', async () => {
+                expect(contactTSAs.length == (await service.deleteBulkTSA('contacts', TSAarr)).length).to.be.true;
+            });
+        });
+
+        describe('General Activities', () => {
+            let activityTSAs;
+            let updatedActivity;
+            let atds;
+            let activityExternalID;
+            let activityAccount;
+            let createdActivity;
+
+            it('Create account and TSAs for activity CRUD', async () => {
+                atds = await service.getATD('activities');
+                activityTSAs = await service.createBulkTSA('activities', TSAarr, atds[0].TypeID);
+                console.log('The following fields were created:\n' + activityTSAs);
+                activityAccount = await service.createAccount({
+                    ExternalID: 'ActivityTestAccount',
+                    Name: 'Activity Test Account',
+                });
+            });
+
+            it('Create activity', async () => {
+                activityExternalID = 'Automated API Activity ' + Math.floor(Math.random() * 1000000).toString();
+                createdActivity = await service.createActivity({
+                    ExternalID: activityExternalID,
+                    ActivityTypeID: atds[0].TypeID,
+                    Status: 1,
+                    Title: 'Testing',
+                    Account: {
+                        Data: {
+                            InternalID: activityAccount.InternalID,
+                        },
+                    },
+                    TSAAttachmentAPI: {
+                        URL: 'http://www.africau.edu/images/default/sample.pdf',
+                        Content: '',
+                    },
+                    TSACheckboxAPI: true,
+                    TSACurrencyAPI: 10.0,
+                    TSADateAPI: '2020-09-01Z',
+                    TSADateTimeAPI: '2020-08-31T21:00:00Z',
+                    TSADecimalNumberAPI: 5.5,
+                    TSADropdownAPI: '1',
+                    TSAEmailAPI: 'Test@test.com',
+                    TSAHtmlAPI: '<h1>My First Heading</h1>\r\n<p>My first paragraph.</p>',
+                    TSAImageAPI: {
+                        URL:
+                            'https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/stock-photography-slider.jpg',
+                        Content: '',
+                    },
+                    TSALimitedLineAPI: 'Limit text',
+                    TSALinkAPI: 'https://www.ynet.co.il',
+                    TSAMultiChoiceAPI: 'A',
+                    TSANumberAPI: 5,
+                    TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze',
+                    TSAPhoneNumberAPI: '9725554325',
+                    TSASignatureAPI: {
+                        URL: 'https://capitalstars.com/qpay/assets/images/sign2.png',
+                        Content: '',
+                    },
+                    TSASingleLineAPI: 'Random text',
+                } as any);
+
+                const getCreatedActivity = (await service.getActivity({
+                    where: `InternalID=${createdActivity.InternalID}`,
+                })) as any;
+
+                return Promise.all([
+                    expect(getCreatedActivity[0]).to.include({
+                        ExternalID: activityExternalID,
+                        ActivityTypeID: atds[0].TypeID,
+                        Status: 1,
+                        Title: 'Testing',
+                        TSACheckboxAPI: true,
+                        TSACurrencyAPI: 10.0,
+                        TSADateAPI: '2020-09-01Z',
+                        TSADateTimeAPI: '2020-08-31T21:00:00Z',
+                        TSADecimalNumberAPI: 5.5,
+                        TSADropdownAPI: '1',
+                        TSAEmailAPI: 'Test@test.com',
+                        TSAHtmlAPI: '<h1>My First Heading</h1>\r\n<p>My first paragraph.</p>',
+                        TSALimitedLineAPI: 'Limit text',
+                        TSALinkAPI: 'https://www.ynet.co.il',
+                        TSAMultiChoiceAPI: 'A',
+                        TSANumberAPI: 5,
+                        TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze',
+                        TSAPhoneNumberAPI: '9725554325',
+                        TSASingleLineAPI: 'Random text',
+                    }),
+                    expect(getCreatedActivity[0].TSAImageAPI.URL).to.include('stock-photography-slider.jpg'),
+                    expect(getCreatedActivity[0].TSASignatureAPI.URL).to.include('sign2.png'),
+                    expect(getCreatedActivity[0].TSAAttachmentAPI.URL).to.include('sample.pdf'),
+                    expect(JSON.stringify(getCreatedActivity[0].Account)).equals(
+                        JSON.stringify({
+                            Data: {
+                                InternalID: activityAccount.InternalID,
+                                UUID: activityAccount.UUID,
+                                ExternalID: activityAccount.ExternalID,
+                            },
+                            URI: '/accounts/' + activityAccount.InternalID,
+                        }),
+                    ),
+                    expect(getCreatedActivity[0].InternalID).to.equal(createdActivity.InternalID),
+                    expect(getCreatedActivity[0].UUID).to.include(createdActivity.UUID),
+                    expect(getCreatedActivity[0].CreationDateTime).to.contain(new Date().toISOString().split('T')[0]),
+                    expect(getCreatedActivity[0].CreationDateTime).to.contain('Z'),
+                    expect(getCreatedActivity[0].ModificationDateTime).to.contain(
+                        new Date().toISOString().split('T')[0],
+                    ),
+                    expect(getCreatedActivity[0].ModificationDateTime).to.contain('Z'),
+                    expect(getCreatedActivity[0].Archive).to.be.false,
+                    expect(getCreatedActivity[0].Hidden).to.be.false,
+                    expect(getCreatedActivity[0].StatusName).to.include('InCreation'),
+                    expect(getCreatedActivity[0].Agent).to.be.null,
+                    expect(getCreatedActivity[0].ContactPerson).to.be.null,
+                    expect(getCreatedActivity[0].Creator).to.be.null,
+                ]);
+            });
+
+            it('Update activity', async () => {
+                return Promise.all([
+                    expect(
+                        (updatedActivity = await service.createActivity({
+                            ExternalID: activityExternalID,
+                            Status: 2,
+                            Title: 'Testing Update',
+                            Account: {
+                                Data: {
+                                    InternalID: activityAccount.InternalID,
+                                },
+                            },
+                            TSAAttachmentAPI: {
+                                URL: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+                                Content: '',
+                            },
+                            TSACheckboxAPI: false,
+                            TSACurrencyAPI: 15.0,
+                            TSADateAPI: '2020-09-05Z',
+                            TSADateTimeAPI: '2020-09-30T21:00:00Z',
+                            TSADecimalNumberAPI: 0.5,
+                            TSADropdownAPI: '2',
+                            TSAEmailAPI: 'TestUpdate@test.com',
+                            TSAHtmlAPI: '<h1>My First Updated Heading</h1>\r\n<p>My first paragraph.</p>',
+                            TSAImageAPI: {
+                                URL: 'https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg',
+                                Content: '',
+                            },
+                            TSALimitedLineAPI: 'Limit Update',
+                            TSALinkAPI: 'https://www.google.com',
+                            TSAMultiChoiceAPI: 'B',
+                            TSANumberAPI: 2,
+                            TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nUpdate',
+                            TSAPhoneNumberAPI: '972555432512',
+                            TSASignatureAPI: {
+                                URL:
+                                    'https://upload.wikimedia.org/wikipedia/commons/9/92/Platt_Rogers_Spencer_signature.png',
+                                Content: '',
+                            },
+                            TSASingleLineAPI: 'Random updated text',
+                        } as any)),
+                    ).to.be.include({
+                        ExternalID: activityExternalID,
+                        ActivityTypeID: atds[0].TypeID,
+                        Status: 2,
+                        Title: 'Testing Update',
+                        TSACheckboxAPI: false,
+                        TSACurrencyAPI: 15.0,
+                        TSADateAPI: '2020-09-05Z',
+                        TSADateTimeAPI: '2020-09-30T21:00:00Z',
+                        TSADecimalNumberAPI: 0.5,
+                        TSADropdownAPI: '2',
+                        TSAEmailAPI: 'TestUpdate@test.com',
+                        TSAHtmlAPI: '<h1>My First Updated Heading</h1>\r\n<p>My first paragraph.</p>',
+                        TSALimitedLineAPI: 'Limit Update',
+                        TSALinkAPI: 'https://www.google.com',
+                        TSAMultiChoiceAPI: 'B',
+                        TSANumberAPI: 2,
+                        TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nUpdate',
+                        TSAPhoneNumberAPI: '972555432512',
+                        TSASingleLineAPI: 'Random updated text',
+                    }),
+                    expect(updatedActivity.TSAImageAPI.URL).to.include('image-human-brain_99433-298.jpg'),
+                    expect(updatedActivity.TSASignatureAPI.URL).to.include('platt_rogers_spencer_signature.png'),
+                    expect(updatedActivity.TSAAttachmentAPI.URL).to.include('dummy.pdf'),
+                    expect(JSON.stringify(updatedActivity.Account)).equals(
+                        JSON.stringify({
+                            Data: {
+                                InternalID: activityAccount.InternalID,
+                                UUID: activityAccount.UUID,
+                                ExternalID: activityAccount.ExternalID,
+                            },
+                            URI: '/accounts/' + activityAccount.InternalID,
+                        }),
+                    ),
+                    expect(updatedActivity.InternalID).to.equal(createdActivity.InternalID),
+                    expect(updatedActivity.UUID).to.include(createdActivity.UUID),
+                    expect(updatedActivity.CreationDateTime).to.contain(new Date().toISOString().split('T')[0]),
+                    expect(updatedActivity.CreationDateTime).to.contain('Z'),
+                    expect(updatedActivity.ModificationDateTime).to.contain(new Date().toISOString().split('T')[0]),
+                    expect(updatedActivity.ModificationDateTime).to.contain('Z'),
+                    expect(updatedActivity.Archive).to.be.false,
+                    expect(updatedActivity.Hidden).to.be.false,
+                    expect(updatedActivity.StatusName).to.include('Submitted'),
+                    expect(updatedActivity.Agent).to.be.null,
+                    expect(updatedActivity.ContactPerson).to.be.null,
+                    expect(updatedActivity.Creator).to.be.null,
+                ]);
+            });
+
+            it('Delete activity', async () => {
+                expect(await service.deleteActivity(createdActivity.InternalID as any)).to.be.true,
+                    expect(await service.deleteActivity(createdActivity.InternalID as any)).to.be.false,
+                    expect(await service.getActivity({ where: `InternalID=${createdActivity.InternalID}` }))
+                        .to.be.an('array')
+                        .with.lengthOf(0);
+            });
+
+            it('Delete activity test account and TSAs', async () => {
+                expect(
+                    activityTSAs.length == (await service.deleteBulkTSA('activities', TSAarr, atds[0].TypeID)).length,
+                ).to.be.true,
+                    expect(await service.deleteAccount(activityAccount.InternalID as any)).to.be.true,
+                    expect(await service.deleteAccount(activityAccount.InternalID as any)).to.be.false,
+                    expect(await service.getAccounts({ where: `InternalID=${activityAccount.InternalID}` }))
+                        .to.be.an('array')
+                        .with.lengthOf(0);
+            });
+        });
+
+        describe('Transactions', () => {
+            let atds;
+            let transactionTSAs;
+            let transactionLinesTSAs;
+            //let updatedTransaction;
+            let transactionAccount;
+            //let createdTransaction;
+            //let items;
+            //let createdTransactionLines;
+            //let updatedTransactionLines;
+            //let addedTransactionLines;
+            //let transactionExternalID;
+
+            it('Create account and TSAs for transactions CRUD', async () => {
+                atds = await service.getATD('transactions');
+                transactionTSAs = await service.createBulkTSA('transactions', TSAarr, atds[0].TypeID);
+                console.log('The following fields were created:\n' + transactionTSAs);
+                transactionLinesTSAs = await service.createBulkTSA(
+                    'transaction_lines',
+                    transactionLineTSAarr,
+                    atds[0].TypeID,
+                );
+                console.log('The following fields were created:\n' + transactionLinesTSAs);
+                transactionAccount = await service.createAccount({
+                    ExternalID: 'TransactionTestAccount',
+                    Name: 'Transaction Test Account',
+                });
+            });
+
+            // it('Create transaction', async () => {
+            //     transactionExternalID = 'Automated API Transaction ' + Math.floor(Math.random() * 1000000).toString();
+            //     const catalogs = await generalService.getCatalogs();
+            //     createdTransaction = await service.createTransaction({
+            //         ExternalID: transactionExternalID,
+            //         ActivityTypeID: atds[0].TypeID,
+            //         Status: 1,
+            //         Account: {
+            //             Data: {
+            //                 InternalID: transactionAccount.InternalID,
+            //             },
+            //         },
+            //         Catalog: {
+            //             Data: {
+            //                 ExternalID: catalogs[0].ExternalID,
+            //             },
+            //         },
+            //         TSAAttachmentAPI: {
+            //             URL: 'http://www.africau.edu/images/default/sample.pdf',
+            //             Content: '',
+            //         },
+            //         TSACheckboxAPI: true,
+            //         TSACurrencyAPI: 10.0,
+            //         TSADateAPI: '2020-09-01Z',
+            //         TSADateTimeAPI: '2020-08-31T21:00:00Z',
+            //         TSADecimalNumberAPI: 5.5,
+            //         TSADropdownAPI: '1',
+            //         TSAEmailAPI: 'Test@test.com',
+            //         TSAHtmlAPI: '<h1>My First Heading</h1>\r\n<p>My first paragraph.</p>',
+            //         TSAImageAPI: {
+            //             URL:
+            //                 'https://filedn.com/ltOdFv1aqz1YIFhf4gTY8D7/ingus-info/BLOGS/Photography-stocks3/stock-photography-slider.jpg',
+            //             Content: '',
+            //         },
+            //         TSALimitedLineAPI: 'Limit text',
+            //         TSALinkAPI: 'https://www.ynet.co.il',
+            //         TSAMultiChoiceAPI: 'A',
+            //         TSANumberAPI: 5,
+            //         TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze',
+            //         TSAPhoneNumberAPI: '9725554325',
+            //         TSASignatureAPI: {
+            //             URL: 'https://capitalstars.com/qpay/assets/images/sign2.png',
+            //             Content: '',
+            //         },
+            //         TSASingleLineAPI: 'Random text',
+            //     } as any);
+
+            //     const getCreatedTransaction = (await service.getTransaction({
+            //         where: `InternalID=${createdTransaction.InternalID}`,
+            //     })) as any;
+
+            //     return Promise.all([
+            //         expect(getCreatedTransaction[0]).to.include({
+            //             ExternalID: transactionExternalID,
+            //             ActivityTypeID: atds[0].TypeID,
+            //             Status: 1,
+            //             TSACheckboxAPI: true,
+            //             TSACurrencyAPI: 10.0,
+            //             TSADateAPI: '2020-09-01Z',
+            //             TSADateTimeAPI: '2020-08-31T21:00:00Z',
+            //             TSADecimalNumberAPI: 5.5,
+            //             TSADropdownAPI: '1',
+            //             TSAEmailAPI: 'Test@test.com',
+            //             TSAHtmlAPI: '<h1>My First Heading</h1>\r\n<p>My first paragraph.</p>',
+            //             TSALimitedLineAPI: 'Limit text',
+            //             TSALinkAPI: 'https://www.ynet.co.il',
+            //             TSAMultiChoiceAPI: 'A',
+            //             TSANumberAPI: 5,
+            //             TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze',
+            //             TSAPhoneNumberAPI: '9725554325',
+            //             TSASingleLineAPI: 'Random text',
+            //         }),
+            //         expect(getCreatedTransaction[0].TSAImageAPI.URL).to.include('stock-photography-slider.jpg'),
+            //         expect(getCreatedTransaction[0].TSASignatureAPI.URL).to.include('sign2.png'),
+            //         expect(getCreatedTransaction[0].TSAAttachmentAPI.URL).to.include('sample.pdf'),
+            //         expect(JSON.stringify(getCreatedTransaction[0].Account)).equals(
+            //             JSON.stringify({
+            //                 Data: {
+            //                     InternalID: transactionAccount.InternalID,
+            //                     UUID: transactionAccount.UUID,
+            //                     ExternalID: transactionAccount.ExternalID,
+            //                 },
+            //                 URI: '/accounts/' + transactionAccount.InternalID,
+            //             }),
+            //         ),
+            //         expect(getCreatedTransaction[0].InternalID).to.equal(createdTransaction.InternalID),
+            //         expect(getCreatedTransaction[0].UUID).to.include(createdTransaction.UUID),
+            //         expect(getCreatedTransaction[0].CreationDateTime).to.contain(
+            //             new Date().toISOString().split('T')[0],
+            //         ),
+            //         expect(getCreatedTransaction[0].CreationDateTime).to.contain('Z'),
+            //         expect(getCreatedTransaction[0].ModificationDateTime).to.contain(
+            //             new Date().toISOString().split('T')[0],
+            //         ),
+            //         expect(getCreatedTransaction[0].ModificationDateTime).to.contain('Z'),
+            //         expect(getCreatedTransaction[0].Archive).to.be.false,
+            //         expect(getCreatedTransaction[0].Hidden).to.be.false,
+            //         expect(getCreatedTransaction[0].StatusName).to.include('InCreation'),
+            //         expect(getCreatedTransaction[0].Agent).to.be.null,
+            //         expect(getCreatedTransaction[0].ContactPerson).to.be.null,
+            //         expect(getCreatedTransaction[0].Creator).to.be.null,
+            //         expect(getCreatedTransaction[0].OriginAccount).to.be.null,
+            //         expect(getCreatedTransaction[0].TransactionLines).to.include({
+            //             URI: '/transaction_lines?where=TransactionInternalID=' + createdTransaction.InternalID,
+            //         }),
+            //     ]);
+            // });
+
+            // it('Create transaction lines', async () => {
+            //     items = await service.getItems();
+
+            //     createdTransactionLines = await service.createTransactionLine({
+            //         TransactionInternalID: createdTransaction.InternalID,
+            //         LineNumber: 0,
+            //         ItemExternalID: items[0].ExternalID,
+            //         UnitsQuantity: 1,
+            //         TSACheckboxAPI: true,
+            //         TSACurrencyAPI: 10.0,
+            //         TSADateAPI: '2020-09-01Z',
+            //         TSADateTimeAPI: '2020-08-31T21:00:00Z',
+            //         TSADecimalNumberAPI: 5.5,
+            //         TSADropdownAPI: '1',
+            //         TSAEmailAPI: 'Test@test.com',
+            //         TSAHtmlAPI: '<h1>My First Heading</h1>\r\n<p>My first paragraph.</p>',
+            //         TSALimitedLineAPI: 'Limit text',
+            //         TSALinkAPI: 'https://www.ynet.co.il',
+            //         TSAMultiChoiceAPI: 'A',
+            //         TSANumberAPI: 5,
+            //         TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze',
+            //         TSASingleLineAPI: 'Random text',
+            //     } as any);
+
+            //     const getCreatedTransactionLine = await service.getTransactionLines(createdTransaction.InternalID);
+
+            //     return Promise.all([
+            //         expect(getCreatedTransactionLine[0]).to.include({
+            //             LineNumber: 0,
+            //             UnitsQuantity: 1.0,
+            //             TSACheckboxAPI: true,
+            //             TSACurrencyAPI: 10.0,
+            //             TSADateAPI: '2020-09-01Z',
+            //             TSADateTimeAPI: '2020-08-31T21:00:00Z',
+            //             TSADecimalNumberAPI: 5.5,
+            //             TSADropdownAPI: '1',
+            //             TSAEmailAPI: 'Test@test.com',
+            //             TSAHtmlAPI: '<h1>My First Heading</h1>\r\n<p>My first paragraph.</p>',
+            //             TSALimitedLineAPI: 'Limit text',
+            //             TSALinkAPI: 'https://www.ynet.co.il',
+            //             TSAMultiChoiceAPI: 'A',
+            //             TSANumberAPI: 5,
+            //             TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze',
+            //             TSASingleLineAPI: 'Random text',
+            //             TotalUnitsPriceAfterDiscount: 0.0,
+            //             TotalUnitsPriceBeforeDiscount: 0.0,
+            //             UnitDiscountPercentage: 0.0,
+            //             UnitPrice: 0.0,
+            //             UnitPriceAfterDiscount: 0.0,
+            //         }),
+            //         expect(JSON.stringify(getCreatedTransactionLine[0].Item)).equals(
+            //             JSON.stringify({
+            //                 Data: {
+            //                     InternalID: items[0].InternalID,
+            //                     UUID: items[0].UUID,
+            //                     ExternalID: items[0].ExternalID,
+            //                 },
+            //                 URI: '/items/' + items[0].InternalID,
+            //             }),
+            //         ),
+            //         expect(JSON.stringify(getCreatedTransactionLine[0].Transaction)).equals(
+            //             JSON.stringify({
+            //                 Data: {
+            //                     InternalID: createdTransaction.InternalID,
+            //                     UUID: createdTransaction.UUID,
+            //                     ExternalID: createdTransaction.ExternalID,
+            //                 },
+            //                 URI: '/transactions/' + createdTransaction.InternalID,
+            //             }),
+            //         ),
+            //         expect(getCreatedTransactionLine[0].InternalID).to.equal(createdTransactionLines.InternalID),
+            //         expect(getCreatedTransactionLine[0].UUID).to.include(createdTransactionLines.UUID),
+            //         expect(getCreatedTransactionLine[0].CreationDateTime).to.contain(
+            //             new Date().toISOString().split('T')[0],
+            //         ),
+            //         expect(getCreatedTransactionLine[0].CreationDateTime).to.contain('Z'),
+            //         expect(getCreatedTransactionLine[0].ModificationDateTime).to.contain(
+            //             new Date().toISOString().split('T')[0],
+            //         ),
+            //         expect(getCreatedTransactionLine[0].ModificationDateTime).to.contain('Z'),
+            //         expect(getCreatedTransactionLine[0].Archive).to.be.false,
+            //         expect(getCreatedTransactionLine[0].Hidden).to.be.false,
+            //         expect(await service.getTransactionLines(createdTransaction.InternalID))
+            //             .to.be.an('array')
+            //             .with.lengthOf(1),
+            //     ]);
+            // });
+
+            // it('Update transaction lines', async () => {
+            //     items = await service.getItems();
+
+            //     expect(
+            //         (updatedTransactionLines = await service.createTransactionLine({
+            //             TransactionInternalID: createdTransaction.InternalID,
+            //             LineNumber: 0,
+            //             ItemExternalID: items[0].ExternalID,
+            //             UnitsQuantity: 5.0,
+            //             TSACheckboxAPI: false,
+            //             TSACurrencyAPI: 15.0,
+            //             TSADateAPI: '2020-10-01Z',
+            //             TSADateTimeAPI: '2020-08-11T21:00:00Z',
+            //             TSADecimalNumberAPI: 5.2,
+            //             TSADropdownAPI: '2',
+            //             TSAEmailAPI: 'Test1@test.com',
+            //             TSAHtmlAPI: '<h1>My First Heading test</h1>\r\n<p>My first paragraph test.</p>',
+            //             TSALimitedLineAPI: 'Limit text',
+            //             TSALinkAPI: 'https://www.ynet.co.il',
+            //             TSAMultiChoiceAPI: 'B',
+            //             TSANumberAPI: 2,
+            //             TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze\r\nTest',
+            //             TSASingleLineAPI: 'Random text test',
+            //             TotalUnitsPriceAfterDiscount: 0.0,
+            //             TotalUnitsPriceBeforeDiscount: 0.0,
+            //             UnitDiscountPercentage: 100.0,
+            //             UnitPrice: 5.0,
+            //             UnitPriceAfterDiscount: 0.0,
+            //         } as any)),
+            //     ).to.be.include({
+            //         LineNumber: 0,
+            //         UnitsQuantity: 5.0,
+            //         TSACheckboxAPI: false,
+            //         TSACurrencyAPI: 15.0,
+            //         TSADateAPI: '2020-10-01Z',
+            //         TSADateTimeAPI: '2020-08-11T21:00:00Z',
+            //         TSADecimalNumberAPI: 5.2,
+            //         TSADropdownAPI: '2',
+            //         TSAEmailAPI: 'Test1@test.com',
+            //         TSAHtmlAPI: '<h1>My First Heading test</h1>\r\n<p>My first paragraph test.</p>',
+            //         TSALimitedLineAPI: 'Limit text',
+            //         TSALinkAPI: 'https://www.ynet.co.il',
+            //         TSAMultiChoiceAPI: 'B',
+            //         TSANumberAPI: 2,
+            //         TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nAmaze\r\nTest',
+            //         TSASingleLineAPI: 'Random text test',
+            //         TotalUnitsPriceAfterDiscount: 0.0,
+            //         TotalUnitsPriceBeforeDiscount: 25.0,
+            //         UnitDiscountPercentage: 100.0,
+            //         UnitPrice: 5.0,
+            //         UnitPriceAfterDiscount: 0.0,
+            //     }),
+            //         expect(JSON.stringify(updatedTransactionLines.Item)).equals(
+            //             JSON.stringify({
+            //                 Data: {
+            //                     InternalID: items[0].InternalID,
+            //                     UUID: items[0].UUID,
+            //                     ExternalID: items[0].ExternalID,
+            //                 },
+            //                 URI: '/items/' + items[0].InternalID,
+            //             }),
+            //         ),
+            //         expect(JSON.stringify(updatedTransactionLines.Transaction)).equals(
+            //             JSON.stringify({
+            //                 Data: {
+            //                     InternalID: createdTransaction.InternalID,
+            //                     UUID: createdTransaction.UUID,
+            //                     ExternalID: createdTransaction.ExternalID,
+            //                 },
+            //                 URI: '/transactions/' + createdTransaction.InternalID,
+            //             }),
+            //         ),
+            //         expect(updatedTransactionLines.InternalID).to.equal(createdTransactionLines.InternalID),
+            //         expect(updatedTransactionLines.UUID).to.include(createdTransactionLines.UUID),
+            //         expect(updatedTransactionLines.CreationDateTime).to.contain(new Date().toISOString().split('T')[0]),
+            //         expect(updatedTransactionLines.CreationDateTime).to.contain('Z'),
+            //         expect(updatedTransactionLines.ModificationDateTime).to.contain(
+            //             new Date().toISOString().split('T')[0],
+            //         ),
+            //         expect(updatedTransactionLines.ModificationDateTime).to.contain('Z'),
+            //         expect(updatedTransactionLines.Archive).to.be.false,
+            //         expect(updatedTransactionLines.Hidden).to.be.false,
+            //         expect(await service.getTransactionLines(createdTransaction.InternalID))
+            //             .to.be.an('array')
+            //             .with.lengthOf(1);
+            // });
+
+            // it('Add transaction lines', async () => {
+            //     items = await service.getItems();
+
+            //     addedTransactionLines = await service.createTransactionLine({
+            //         TransactionInternalID: createdTransaction.InternalID,
+            //         LineNumber: 1,
+            //         ItemExternalID: items[1].ExternalID,
+            //         UnitsQuantity: 1.0,
+            //     });
+            //     expect(await service.getTransactionLines(createdTransaction.InternalID))
+            //         .to.be.an('array')
+            //         .with.lengthOf(2);
+            // });
+
+            // it('Delete transaction lines', async () => {
+            //     expect(await service.deleteTransactionLine(createdTransactionLines.InternalID as any)).to.be.true,
+            //         expect(await service.deleteTransactionLine(createdTransactionLines.InternalID as any)).to.be.false,
+            //         expect(await service.getTransactionLines(createdTransaction.InternalID))
+            //             .to.be.an('array')
+            //             .with.lengthOf(1),
+            //         expect(await service.deleteTransactionLine(addedTransactionLines.InternalID as any)).to.be.true,
+            //         expect(await service.deleteTransactionLine(addedTransactionLines.InternalID as any)).to.be.false,
+            //         expect(await service.getTransactionLines(createdTransaction.InternalID))
+            //             .to.be.an('array')
+            //             .with.lengthOf(0);
+            // });
+
+            // it('Update transaction', async () => {
+            //     expect(
+            //         (updatedTransaction = await service.createTransaction({
+            //             ExternalID: transactionExternalID,
+            //             Status: 2,
+            //             Account: {
+            //                 Data: {
+            //                     InternalID: transactionAccount.InternalID,
+            //                 },
+            //             },
+            //             TSAAttachmentAPI: {
+            //                 URL: 'https://www.w3.org/WAI/ER/tests/xhtml/testfiles/resources/pdf/dummy.pdf',
+            //                 Content: '',
+            //             },
+            //             TSACheckboxAPI: false,
+            //             TSACurrencyAPI: 15.0,
+            //             TSADateAPI: '2020-09-05Z',
+            //             TSADateTimeAPI: '2020-09-30T21:00:00Z',
+            //             TSADecimalNumberAPI: 0.5,
+            //             TSADropdownAPI: '2',
+            //             TSAEmailAPI: 'TestUpdate@test.com',
+            //             TSAHtmlAPI: '<h1>My First Updated Heading</h1>\r\n<p>My first paragraph.</p>',
+            //             TSAImageAPI: {
+            //                 URL: 'https://image.freepik.com/free-photo/image-human-brain_99433-298.jpg',
+            //                 Content: '',
+            //             },
+            //             TSALimitedLineAPI: 'Limit Update',
+            //             TSALinkAPI: 'https://www.google.com',
+            //             TSAMultiChoiceAPI: 'B',
+            //             TSANumberAPI: 2,
+            //             TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nUpdate',
+            //             TSAPhoneNumberAPI: '972555432512',
+            //             TSASignatureAPI: {
+            //                 URL:
+            //                     'https://upload.wikimedia.org/wikipedia/commons/9/92/Platt_Rogers_Spencer_signature.png',
+            //                 Content: '',
+            //             },
+            //             TSASingleLineAPI: 'Random updated text',
+            //         } as any)),
+            //     ).to.be.include({
+            //         ExternalID: transactionExternalID,
+            //         ActivityTypeID: atds[0].TypeID,
+            //         Status: 2,
+            //         TSACheckboxAPI: false,
+            //         TSACurrencyAPI: 15.0,
+            //         TSADateAPI: '2020-09-05Z',
+            //         TSADateTimeAPI: '2020-09-30T21:00:00Z',
+            //         TSADecimalNumberAPI: 0.5,
+            //         TSADropdownAPI: '2',
+            //         TSAEmailAPI: 'TestUpdate@test.com',
+            //         TSAHtmlAPI: '<h1>My First Updated Heading</h1>\r\n<p>My first paragraph.</p>',
+            //         TSALimitedLineAPI: 'Limit Update',
+            //         TSALinkAPI: 'https://www.google.com',
+            //         TSAMultiChoiceAPI: 'B',
+            //         TSANumberAPI: 2,
+            //         TSAParagraphAPI: 'Paragraph Text\r\nMuch\r\nParagraph\r\nSo\r\nUpdate',
+            //         TSAPhoneNumberAPI: '972555432512',
+            //         TSASingleLineAPI: 'Random updated text',
+            //     }),
+            //         expect(updatedTransaction.TSAImageAPI.URL).to.include('image-human-brain_99433-298.jpg'),
+            //         expect(updatedTransaction.TSASignatureAPI.URL).to.include('platt_rogers_spencer_signature.png'),
+            //         expect(updatedTransaction.TSAAttachmentAPI.URL).to.include('dummy.pdf'),
+            //         expect(JSON.stringify(updatedTransaction.Account)).equals(
+            //             JSON.stringify({
+            //                 Data: {
+            //                     InternalID: transactionAccount.InternalID,
+            //                     UUID: transactionAccount.UUID,
+            //                     ExternalID: transactionAccount.ExternalID,
+            //                 },
+            //                 URI: '/accounts/' + transactionAccount.InternalID,
+            //             }),
+            //         ),
+            //         expect(updatedTransaction.InternalID).to.equal(createdTransaction.InternalID),
+            //         expect(updatedTransaction.UUID).to.include(createdTransaction.UUID),
+            //         expect(updatedTransaction.CreationDateTime).to.contain(new Date().toISOString().split('T')[0]),
+            //         expect(updatedTransaction.CreationDateTime).to.contain('Z'),
+            //         expect(updatedTransaction.ModificationDateTime).to.contain(new Date().toISOString().split('T')[0]),
+            //         expect(updatedTransaction.ModificationDateTime).to.contain('Z'),
+            //         expect(updatedTransaction.Archive).to.be.false,
+            //         expect(updatedTransaction.Hidden).to.be.false,
+            //         expect(updatedTransaction.StatusName).to.include('Submitted'),
+            //         expect(updatedTransaction.Agent).to.be.null,
+            //         expect(updatedTransaction.ContactPerson).to.be.null,
+            //         expect(updatedTransaction.Creator).to.be.null;
+            // });
+
+            // it('Delete transaction', async () => {
+            //     expect(await service.deleteTransaction(createdTransaction.InternalID as any)).to.be.true,
+            //         expect(await service.deleteTransaction(createdTransaction.InternalID as any)).to.be.false,
+            //         expect(await service.getTransaction({ where: `InternalID=${createdTransaction.InternalID}` }))
+            //             .to.be.an('array')
+            //             .with.lengthOf(0);
+            // });
+
+            it('Delete transaction test account and TSAs', async () => {
+                expect(
+                    transactionTSAs.length ==
+                        (await service.deleteBulkTSA('transactions', TSAarr, atds[0].TypeID)).length,
+                ).to.be.true,
+                    expect(
+                        transactionLinesTSAs.length ==
+                            (await service.deleteBulkTSA('transaction_lines', transactionLineTSAarr, atds[0].TypeID))
+                                .length,
+                    ).to.be.true,
+                    expect(await service.deleteAccount(transactionAccount.InternalID as any)).to.be.true,
+                    expect(await service.deleteAccount(transactionAccount.InternalID as any)).to.be.false,
+                    expect(await service.getAccounts({ where: `InternalID=${transactionAccount.InternalID}` }))
+                        .to.be.an('array')
+                        .with.lengthOf(0);
+            });
         });
     });
 }

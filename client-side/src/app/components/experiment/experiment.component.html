@@ -1,0 +1,54 @@
+<!-- <h1>hello</h1>
+<h2>hello</h2>
+<h3><a href="https://google.com">Link</a> hello</h3>
+<h3><a href="https://google.com" target="_blank">Link</a> hello</h3>
+<h4>hello</h4>
+<h5>hello<b>Oren</b></h5> -->
+
+<div class="addon-container">
+    <div class="header-content" id="addon-header">
+        <div class="content">
+            <div class="spacing-element title">
+                <pep-separator key="sep1" label="Oren is testing the playground" xAlignment="left">
+                </pep-separator>
+            </div>
+        </div>
+    </div>
+
+    <div class="main-content">
+        <div class="content">
+            <mat-card>
+                <div class="smoke-config">
+                    <h4>Change the direction and color of the smoke</h4>
+                    <mat-slider id="slider" min="-8" max="8" step="1" [(value)]="selectSize"
+                        (input)='setSlidervalue($event)' valVar="selectSize">
+                    </mat-slider>
+                    <input type="color" id="selectedColor" value="#ab41d7" (input)='setColor()'>
+                </div>
+
+                <label class="lblTitle">{{ 'Test_Prompt_Title' | translate }} </label>
+                <input class="pepperi-input spacing-bottom" mat-input type="text" [(ngModel)]="apiEndpoint" />
+
+                <button type="button" class="btn pepperi-button mat-button strong color-main sm pull-right flip"
+                    (click)="testSyncEndpoint(apiEndpoint)">
+                    {{ 'Submit_Btn_Title' | translate }}
+                </button>
+
+                <button type="button" class="btn pepperi-button mat-button weak color-main sm pull-right flip"
+                    (click)="pollExecution(apiEndpoint)">
+                    {{ 'Poll_Btn_Title' | translate }}
+                </button>
+
+                <button type="button" class="btn pepperi-button mat-button weak color-main sm pull-right flip"
+                    (click)="getTestsList()">
+                    {{ 'Get_Tests_List_Btn_Title' | translate }}
+                </button>
+
+            </mat-card>
+        </div>
+
+        <mat-card *ngIf="data">
+            <pre>{{ data | json }}</pre>
+        </mat-card>
+    </div>
+</div>

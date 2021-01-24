@@ -1,0 +1,49 @@
+<div class="addon-container">
+    <div class="header-content addon-header">
+        <div class="content">
+            <div class="spacing-element title">
+                <pep-separator key="sep1" label="Oren is testing the playground" xAlignment="left">
+                </pep-separator>
+            </div>
+        </div>
+    </div>
+
+    <div class="content">
+        <mat-card>
+
+            <label class="lblTitle">{{ 'Test_Prompt_Title' | translate }} </label>
+            <input class="pepperi-input spacing-bottom" mat-input type="text" [(ngModel)]="apiEndpoint" />
+
+            <button type="button" class="btn pepperi-button mat-button strong color-main sm pull-right flip"
+                (click)="testSyncEndpoint(apiEndpoint)">
+                {{ 'Submit_Btn_Title' | translate }}
+            </button>
+
+            <button type="button" class="btn pepperi-button mat-button weak color-main sm pull-right flip"
+                (click)="pollExecution(apiEndpoint)">
+                {{ 'Poll_Btn_Title' | translate }}
+            </button>
+
+            <button type="button" class="btn pepperi-button mat-button weak color-main sm pull-right flip"
+                (click)="getTestsList()">
+                {{ 'Get_Tests_List_Btn_Title' | translate }}
+            </button>
+
+        </mat-card>
+    </div>
+
+    <mat-card *ngIf="data">
+        <pre>{{ data | json }}</pre>
+    </mat-card>
+
+    <div class="main-content">
+        <div class="content">
+            <div class="child1 child-container">
+                <button rowSpan="2" mat-button (click)="getTestsList()"
+                    class="spacing-element pep-button md strong ellipsis">
+                    {{ "Get_Tests_List_Btn_Title" | translate }}
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
