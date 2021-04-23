@@ -13,7 +13,6 @@ server.addStaticFolder(
     `/assets/plugins/${config.AddonUUID}/${config.AddonVersion}`,
     process.cwd() + '/../publish/editors',
 );
-server.addStaticFolder(`/`, process.cwd() + '/../publish/editors');
 
 // serve the plugin assets locally
 server.addStaticFolder(
