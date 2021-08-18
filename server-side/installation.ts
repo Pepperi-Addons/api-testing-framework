@@ -7,9 +7,15 @@ If the result of your code is 'false' then return:
 The error Message is importent! it will be written in the audit log and help the user to understand what happen
 */
 
-import /*Client, Request */ '@pepperi-addons/debug-server';
+import { Client /*, Request */ } from '@pepperi-addons/debug-server';
+import GeneralService from './services/general.service';
+import { ADALService } from './services/adal.service';
 
-export async function install(/*client: Client, request: Request*/): Promise<any> {
+export async function install(client: Client /*, request: Request*/): Promise<any> {
+    const generalService = new GeneralService(client);
+    const adalService = new ADALService(generalService.papiClient);
+    // const createNewSchema =
+    await adalService.postSchema({ Name: 'TypeScript Installation Schema' });
     return { success: true, resultObject: {} };
 }
 

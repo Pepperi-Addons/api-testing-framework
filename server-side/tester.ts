@@ -1,13 +1,15 @@
 import Mocha, { Suite } from 'mocha';
-import chai, { expect } from 'chai';
+import chai, { expect, assert } from 'chai';
 import promised from 'chai-as-promised';
 import fs from 'fs';
 import path from 'path';
 import Mochawesome from 'mochawesome';
+import { Client } from '@pepperi-addons/debug-server';
 
 chai.use(promised);
 
-export default function Tester(testName?: string, environment?: string) {
+export default function Tester(client?: Client, testName?: string, environment?: string) {
+    const isLocal = client ? client.AssetsBaseUrl.includes('/localhost:') : false;
     const testObject = {};
     const mochaDir = `/tmp/${testName ? testName : 'Mocha'}-${
         environment ? environment : 'Default'
@@ -23,7 +25,7 @@ export default function Tester(testName?: string, environment?: string) {
         reporterOptions: {
             reportDir: mochaDir,
             reportFilename: fileName,
-            html: false,
+            html: isLocal,
             consoleReporter: 'none',
         },
         timeout: 1200000,
@@ -45,6 +47,8 @@ export default function Tester(testName?: string, environment?: string) {
         },
 
         expect: expect,
+
+        assert: assert,
 
         run: () => {
             return new Promise((resolve, reject) => {
@@ -133,11 +137,11 @@ export default function Tester(testName?: string, environment?: string) {
         },
 
         printTestResults(describe, expect, it, testSuitesName) {
-            describe(`${testSuitesName} Tests Suites`, function () {
+            describe(`${testSuitesName} Tests Suites`, () => {
                 for (const key in testObject) {
-                    describe(key, function () {
+                    describe(key, () => {
                         for (let i = 0; i < testObject[key]['testsNamesArr'].length; i++) {
-                            it(i + 1 + ') ' + testObject[key]['testsNamesArr'][i], function () {
+                            it(i + 1 + ') ' + testObject[key]['testsNamesArr'][i], () => {
                                 expect(testObject[key]['errorsArr'][i].toString()).to.not.contain(' ');
                             });
                         }
