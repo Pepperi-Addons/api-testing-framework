@@ -21,7 +21,10 @@ export async function install(client: Client /*, request: Request*/): Promise<an
     const PepperiOwnerID = generalService.papiClient['options'].addonUUID;
 
     //Create Schema With Addon Installation
+    // const forDebugSchema =
     await adalService.postSchema({ Name: 'TypeScript Installation Schema' });
+    // console.log('postSchema');
+    // console.log(JSON.stringify(forDebugSchema));
 
     //Create Subscription With Addon Installation
     const subscriptionBody: Subscription = {
@@ -36,7 +39,10 @@ export async function install(client: Client /*, request: Request*/): Promise<an
         },
         Name: 'Test_Update_PNS',
     };
+    // const forDebugSubs =
     await pepperiNotificationServiceService.subscribe(subscriptionBody);
+    // console.log('subscribe');
+    // console.log(JSON.stringify(forDebugSubs));
     return { success: true, resultObject: {} };
 }
 
