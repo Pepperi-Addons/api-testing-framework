@@ -1,13 +1,5 @@
 import { PapiClient } from '@pepperi-addons/papi-sdk';
-
-declare type ResourceTypes =
-    | 'activities'
-    | 'transactions'
-    | 'transaction_lines'
-    | 'catalogs'
-    | 'accounts'
-    | 'items'
-    | 'user_defined_tables';
+import { ResourceTypes } from '../services/general.service';
 
 export interface MetaDataATD {
     TypeID?: number;
@@ -39,18 +31,6 @@ export interface MetaDataUDT {
         Dormant?: boolean;
         Volatile?: boolean;
     };
-}
-
-interface FindOptions {
-    fields?: string[];
-    where?: string;
-    orderBy?: string;
-    page?: number;
-    page_size?: number;
-    include_nested?: boolean;
-    full_mode?: boolean;
-    include_deleted?: boolean;
-    is_distinct?: boolean;
 }
 
 interface References {
@@ -89,7 +69,7 @@ export class ImportExportATDService {
 
     exportATD(type: ResourceTypes, subtype: number) {
         return this.papiClient.get(
-            `/addons/api/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/export_type_definition?type=${type}&subtype=${subtype}`,
+            `/addons/api/async/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/export_type_definition?type=${type}&subtype=${subtype}`,
         );
     }
 
@@ -108,7 +88,7 @@ export class ImportExportATDService {
         // );
         return this.papiClient.apiCall(
             'POST',
-            `/addons/api/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/import_type_definition?type=${type}&subtype=${subtype}`,
+            `/addons/api/async/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/import_type_definition?type=${type}&subtype=${subtype}`,
             body,
         );
     }
@@ -119,11 +99,13 @@ export class ImportExportATDService {
         //     `/addons/api/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/import_type_definition?type=${type}`,
         //     body,
         // );
-        return this.papiClient.apiCall(
-            'POST',
-            `/addons/api/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/import_type_definition?type=${type}`,
-            body,
-        );
+        //18/02/2021 - This was removed to not create trash ATD until (DI-17656) will be solved.
+        return `This should not work, it removed from the test and should not be used, type:${type}, body:${body}`;
+        // return this.papiClient.apiCall(
+        //     'POST',
+        //     `/addons/api/async/e9029d7f-af32-4b0e-a513-8d9ced6f8186/api/import_type_definition?type=${type}`,
+        //     body,
+        // );
     }
 
     //UDT

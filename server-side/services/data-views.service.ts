@@ -1,15 +1,5 @@
-import { PapiClient, DataView } from '@pepperi-addons/papi-sdk';
-interface FindOptions {
-    fields?: string[];
-    where?: string;
-    orderBy?: string;
-    page?: number;
-    page_size?: number;
-    include_nested?: boolean;
-    full_mode?: boolean;
-    include_deleted?: boolean;
-    is_distinct?: boolean;
-}
+import { PapiClient, DataView, FindOptions } from '@pepperi-addons/papi-sdk';
+
 export class DataViewsService {
     constructor(public papiClient: PapiClient) {}
 
@@ -29,7 +19,7 @@ export class DataViewsService {
         return this.papiClient.metaData.dataViews.upsert(dataView);
     }
 
-    postDataViewBatch(dataView: DataView[]) {
-        return this.papiClient.metaData.dataViews.batch(dataView);
+    postDataViewBatch(dataViewArr: DataView[]) {
+        return this.papiClient.metaData.dataViews.batch(dataViewArr);
     }
 }

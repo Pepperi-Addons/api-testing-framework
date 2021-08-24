@@ -1,7 +1,8 @@
-import GeneralService, { TesterFunctions } from '../services/general.service';
+import GeneralService, { TesterFunctions } from '../../services/general.service';
 
 const installedAddons = {
     'Services Framework': '' as any,
+    'WebApp API Framework': '' as any,
     'WebApp Platform': '' as any,
     'Data Views API': '' as any,
     'Addons Manager': '' as any,
@@ -17,11 +18,13 @@ export async function TestDataTest(generalService: GeneralService, tester: Teste
     const expect = tester.expect;
     const it = tester.it;
 
-    const installedAddonsArr = await service.getAddons();
+    const installedAddonsArr = await service.getAddons({ page_size: -1 });
     for (let index = 0; index < installedAddonsArr.length; index++) {
         if (installedAddonsArr[index].Addon !== null) {
             if (installedAddonsArr[index].Addon.Name == 'Services Framework')
                 installedAddons['Services Framework'] = installedAddonsArr[index].Version;
+            if (installedAddonsArr[index].Addon.Name == 'WebApp API Framework')
+                installedAddons['WebApp API Framework'] = installedAddonsArr[index].Version;
             if (installedAddonsArr[index].Addon.Name == 'WebApp Platform')
                 installedAddons['WebApp Platform'] = installedAddonsArr[index].Version;
             if (installedAddonsArr[index].Addon.Name == 'Data Views API')
@@ -53,26 +56,38 @@ export async function TestDataTest(generalService: GeneralService, tester: Teste
         });
 
         describe('Installed Addons Versions', () => {
+            const regex = /\D/g;
             it(`Services Framework | Version: ${installedAddons['Services Framework']}`, () => {
-                expect(installedAddons['Services Framework']).to.not.be.null;
+                const regexMatched = installedAddons['Services Framework'].replace(regex, '');
+                expect(regexMatched.length).to.be.above(2);
             });
             it(`Cross Platforms API | Version: ${installedAddons['Cross Platforms API']}`, () => {
-                expect(installedAddons['Cross Platforms API']).to.not.be.null;
+                const regexMatched = installedAddons['Cross Platforms API'].replace(regex, '');
+                expect(regexMatched.length).to.be.above(2);
+            });
+            it(`WebApp API Framework | Version: ${installedAddons['WebApp API Framework']}`, () => {
+                const regexMatched = installedAddons['WebApp API Framework'].replace(regex, '');
+                expect(regexMatched.length).to.be.above(2);
             });
             it(`WebApp Platform | Version: ${installedAddons['WebApp Platform']}`, () => {
-                expect(installedAddons['WebApp Platform']).to.not.be.null;
+                const regexMatched = installedAddons['WebApp Platform'].replace(regex, '');
+                expect(regexMatched.length).to.be.above(2);
             });
             it(`Settings Framework | Version: ${installedAddons['Settings Framework']}`, () => {
-                expect(installedAddons['Settings Framework']).to.not.be.null;
+                const regexMatched = installedAddons['Settings Framework'].replace(regex, '');
+                expect(regexMatched.length).to.be.above(2);
             });
             it(`Addons Manager | Version: ${installedAddons['Addons Manager']}`, () => {
-                expect(installedAddons['Addons Manage']).to.not.be.null;
+                const regexMatched = installedAddons['Addons Manager'].replace(regex, '');
+                expect(regexMatched.length).to.be.above(2);
             });
             it(`Data Views API | Version: ${installedAddons['Data Views API']}`, () => {
-                expect(installedAddons['Data Views API']).to.not.be.null;
+                const regexMatched = installedAddons['Data Views API'].replace(regex, '');
+                expect(regexMatched.length).to.be.above(2);
             });
             it(`ADAL | Version: ${installedAddons['ADAL']}`, () => {
-                expect(installedAddons['ADAL']).to.not.be.null;
+                const regexMatched = installedAddons['ADAL'].replace(regex, '');
+                expect(regexMatched.length).to.be.above(2);
             });
         });
     });
