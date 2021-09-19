@@ -347,7 +347,7 @@ export async function AccountsTests(generalService: GeneralService, tester: Test
                 try {
                     purgedSchema = await adalService.deleteSchema(schemaNameArr[index]);
                 } catch (error) {
-                    expect(error.message).to.includes(
+                    expect(error).to.have.property('message').that.includes(
                         `failed with status: 400 - Bad Request error: {"fault":{"faultstring":"Failed due to exception: Table schema must be exist`,
                     );
                 }
