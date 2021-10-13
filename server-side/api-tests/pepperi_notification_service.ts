@@ -249,11 +249,6 @@ export async function PepperiNotificationServiceTests(
                                 OldValue: createdTransaction.ExternalID,
                                 FieldID: 'ExternalID',
                             },
-                            {
-                                NewValue: null,
-                                OldValue: 1,
-                                FieldID: 'CatalogPriceFactor',
-                            },
                         ]);
                     });
 
@@ -328,11 +323,6 @@ export async function PepperiNotificationServiceTests(
                                 NewValue: `(Deleted) ${createdTransaction.ExternalID}`,
                                 OldValue: createdTransaction.ExternalID,
                                 FieldID: 'ExternalID',
-                            },
-                            {
-                                NewValue: null,
-                                OldValue: 1,
-                                FieldID: 'CatalogPriceFactor',
                             },
                         ]);
                     });
