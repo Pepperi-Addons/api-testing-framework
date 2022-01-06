@@ -21,7 +21,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
     const chnageVersionResponseArr = await generalService.chnageVersion(request.body.varKey, testData, false);
     //#endregion Upgrade ADAL
 
-    describe('addon relation Tests Suites', () => {
+    describe('Addon Relation Tests Suites', () => {
         describe('Prerequisites Addon for relation Tests', () => {
             //Test Data
             //ADAL
