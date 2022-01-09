@@ -55,7 +55,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
             }
         });
         describe(`addon Relation negative scenarios`, () => {
-            it(`negative : AddonUUID not equale to OwnerID`, async () => {
+            it(`Negative: AddonUUID not equale to OwnerID`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -77,7 +77,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: AddonUUID must be equal to X-Pepperi-OwnerID header value',
                 );
             });
-            it(`negative : AddonUUID not equale to SecretKey`, async () => {
+            it(`Negative: AddonUUID not equale to SecretKey`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -99,7 +99,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: secret key must match to addon UUID',
                 );
             });
-            it(`negative : Name is mandatory field`, async () => {
+            it(`Negative: Name is mandatory field`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -121,7 +121,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: Name is a required field',
                 );
             });
-            it(`negative : RelationName is mandatory field`, async () => {
+            it(`Negative: RelationName is mandatory field`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -143,7 +143,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: RelationName is a required field',
                 );
             });
-            it(`negative : Type is mandatory field`, async () => {
+            it(`Negative: Type is mandatory field`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -165,7 +165,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: Type is a required field',
                 );
             });
-            it(`negative :  Relation type AddonAPI, creation without AddonRelativeURL`, async () => {
+            it(`Negative: Relation type AddonAPI, creation without AddonRelativeURL`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -187,7 +187,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: AddonRelativeURL is a required field',
                 );
             });
-            it(`negative :  Relation type NgComponent, creation without SubType`, async () => {
+            it(`Negative: Relation type NgComponent, creation without SubType`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -212,7 +212,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: SubType is a required field',
                 );
             });
-            it(`negative :  Relation type NgComponent, creation without ComponentName`, async () => {
+            it(`Negative: Relation type NgComponent, creation without ComponentName`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -237,7 +237,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: ComponentName is a required field',
                 );
             });
-            it(`negative :  Relation type NgComponent, creation without ModuleName`, async () => {
+            it(`Negative: Relation type NgComponent, creation without ModuleName`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -262,7 +262,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: ModuleName is a required field',
                 );
             });
-            it(`negative :  Relation type NgComponent, creation without AddonRelativeURL`, async () => {
+            it(`Negative: Relation type NgComponent, creation without AddonRelativeURL`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -287,7 +287,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
                     'Failed due to exception: AddonRelativeURL is a required field',
                 );
             });
-            it(`negative :  Relation type Navigate, creation without AddonRelativeURL`, async () => {
+            it(`Negative: Relation type Navigate, creation without AddonRelativeURL`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelation(
                     {
@@ -366,7 +366,7 @@ export async function AddonRelationTests(generalService: GeneralService, request
             });
 
             ///////////////////////////
-            it(`Update  addon Relation to Hidden = true`, async () => {
+            it(`Update addon Relation to Hidden = true`, async () => {
                 //const secretKey = await relationService.getSecretKey()
                 const relationResponce = await relationService.postRelationStatus(
                     {
