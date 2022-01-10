@@ -463,9 +463,7 @@ async function ImportExportATDTests(generalService: GeneralService, request, tes
                             'Description of Test ATD',
                         );
                         tempATD.Icon = 'icon1';
-                        return expect(
-                            importExportATDService.postTransactionsATD(tempATD),
-                        ).eventually.to.be.rejectedWith(
+                        await expect(importExportATDService.postTransactionsATD(tempATD)).eventually.to.be.rejectedWith(
                             'failed with status: 400 - Bad Request error: {"fault":{"faultstring":"Icon for activity type definition must be with the following format: `icon(number between 2-25)`',
                         );
                     });
@@ -615,17 +613,17 @@ async function ImportExportATDTests(generalService: GeneralService, request, tes
 
                     it('Get Deleted UDT (DI-17251)', async () => {
                         await importExportATDService.deleteUDT(testDataPostUDT.TableID);
-                        return expect(
+                        await expect(
                             importExportATDService.getUDT(testDataPostUDT.TableID),
                         ).eventually.to.have.property('TableID');
                     });
 
                     it('Delete Deleted UDT (DI-17265)', async () => {
-                        return expect(importExportATDService.deleteUDT(testDataPostUDT.TableID)).eventually.to.be.false;
+                        await expect(importExportATDService.deleteUDT(testDataPostUDT.TableID)).eventually.to.be.false;
                     });
 
                     it('Delete Non Existing UDT (DI-17265)', async () => {
-                        return expect(
+                        await expect(
                             importExportATDService.deleteUDT('Non Existing UDT 1234'),
                         ).eventually.to.be.rejectedWith(
                             `failed with status: 404 - Not Found error: {"fault":{"faultstring":"User defined table: Non Existing UDT 1234 doesn't exist.`,
@@ -639,7 +637,7 @@ async function ImportExportATDTests(generalService: GeneralService, request, tes
                             TableID: testDataPostUDT.TableID,
                             Hidden: false,
                         });
-                        return expect(importExportATDService.getUDT(testDataPostUDT.TableID))
+                        await expect(importExportATDService.getUDT(testDataPostUDT.TableID))
                             .eventually.to.have.property('Hidden')
                             .a('boolean').that.is.false;
                     });
@@ -669,7 +667,7 @@ async function ImportExportATDTests(generalService: GeneralService, request, tes
                     });
 
                     it('Correct Error Message for MainKeyType (DI-17269)', async () => {
-                        return expect(
+                        await expect(
                             importExportATDService.postUDT({
                                 TableID: `Test UDT ${Math.floor(Math.random() * 1000000).toString()}`,
                                 MainKeyType: { ID: 1, Name: '' },
@@ -682,7 +680,7 @@ async function ImportExportATDTests(generalService: GeneralService, request, tes
                     });
 
                     it('Correct Error Message for SecondaryKeyType (DI-17332)', async () => {
-                        return expect(
+                        await expect(
                             importExportATDService.postUDT({
                                 TableID: `Test UDT ${Math.floor(Math.random() * 1000000).toString()}`,
                                 MainKeyType: { ID: 35, Name: '' },
@@ -695,7 +693,7 @@ async function ImportExportATDTests(generalService: GeneralService, request, tes
                     });
 
                     it('Correct Error Message for Same MemoryMode Types true (DI-17271)', async () => {
-                        return expect(
+                        await expect(
                             importExportATDService.postUDT({
                                 TableID: `Test UDT ${Math.floor(Math.random() * 1000000).toString()}`,
                                 MainKeyType: { ID: 0, Name: '' },
@@ -1914,12 +1912,12 @@ async function ImportExportATDTests(generalService: GeneralService, request, tes
             describe('Test Clean up', () => {
                 it('Make sure an ATD removed in the end of the tests', async () => {
                     //Make sure an ATD removed in the end of the tests
-                    return expect(TestCleanUpATD(importExportATDService)).eventually.to.be.above(0);
+                    await expect(TestCleanUpATD(importExportATDService)).eventually.to.be.above(0);
                 });
 
                 it('Make sure an UDT removed in the end of the tests', async () => {
                     //Make sure an ATD removed in the end of the tests
-                    return expect(TestCleanUpUDT(importExportATDService)).eventually.to.be.above(0);
+                    await expect(TestCleanUpUDT(importExportATDService)).eventually.to.be.above(0);
                 });
             });
         }
@@ -3087,11 +3085,11 @@ async function ImportExportATDTests(generalService: GeneralService, request, tes
             // describe('Test Activities Override', () => {
             //     it('Make sure an ATD removed in the end of the tests', async () => {
             //         //Make sure an ATD removed in the end of the tests
-            //         return expect(TestCleanUpATD(importExportATDService)).eventually.to.be.above(0);
+            //         await expect(TestCleanUpATD(importExportATDService)).eventually.to.be.above(0);
             //     });
             //     it('Make sure an UDT removed in the end of the tests', async () => {
             //         //Make sure an ATD removed in the end of the tests
-            //         return expect(TestCleanUpUDT(importExportATDService)).eventually.to.be.above(0);
+            //         await expect(TestCleanUpUDT(importExportATDService)).eventually.to.be.above(0);
             //     });
             // });
         }
