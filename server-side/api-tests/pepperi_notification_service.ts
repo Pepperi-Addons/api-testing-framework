@@ -25,12 +25,19 @@ export async function PepperiNotificationServiceTests(
     const _Test_UUID_Second_Addon = uuidv4();
     pepperiNotificationServiceService.papiClient['options'].actionUUID = _Test_UUID_Subscription;
 
+    let varKey;
+    if (request.body.varKeyPro) {
+        varKey = request.body.varKeyPro;
+    } else {
+        varKey = request.body.varKeyStage;
+    }
+
     //#region Upgrade Pepperi Notification Service
     const testData = {
         'Pepperi Notification Service': ['00000000-0000-0000-0000-000000040fa9', ''],
     };
     const isInstalledArr = await generalService.areAddonsInstalled(testData);
-    const chnageVersionResponseArr = await generalService.chnageVersion(request.body.varKey, testData, false);
+    const chnageVersionResponseArr = await generalService.chnageVersion(varKey, testData, false);
     //#endregion Upgrade Pepperi Notification Service
 
     describe('Pepperi Notification Service Tests Suites', () => {
@@ -418,7 +425,7 @@ export async function PepperiNotificationServiceTests(
                             {
                                 method: `POST`,
                                 headers: {
-                                    Authorization: request.body.varKey,
+                                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                                 },
                                 body: JSON.stringify(testAddon),
                             },
@@ -434,11 +441,11 @@ export async function PepperiNotificationServiceTests(
                             versionsArr[index] = await generalService
                                 .fetchStatus(
                                     generalService['client'].BaseURL.replace('papi-eu', 'papi') +
-                                        '/var/addons/versions',
+                                    '/var/addons/versions',
                                     {
                                         method: `POST`,
                                         headers: {
-                                            Authorization: request.body.varKey,
+                                            Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                                         },
                                         body: JSON.stringify(versiontestAddon),
                                     },
@@ -861,12 +868,12 @@ export async function PepperiNotificationServiceTests(
                         for (let index = 0; index < versionsArr.length; index++) {
                             const deleteVersionApiResponse = await generalService.fetchStatus(
                                 generalService['client'].BaseURL.replace('papi-eu', 'papi') +
-                                    '/var/addons/versions/' +
-                                    versionsArr[index].UUID,
+                                '/var/addons/versions/' +
+                                versionsArr[index].UUID,
                                 {
                                     method: `DELETE`,
                                     headers: {
-                                        Authorization: request.body.varKey,
+                                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                                     },
                                 },
                             );
@@ -881,12 +888,12 @@ export async function PepperiNotificationServiceTests(
                     it('Delete Addon', async () => {
                         const deleteApiResponse = await generalService.fetchStatus(
                             generalService['client'].BaseURL.replace('papi-eu', 'papi') +
-                                '/var/addons/' +
-                                createdAddon.Body.UUID,
+                            '/var/addons/' +
+                            createdAddon.Body.UUID,
                             {
                                 method: `DELETE`,
                                 headers: {
-                                    Authorization: request.body.varKey,
+                                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                                 },
                             },
                         );

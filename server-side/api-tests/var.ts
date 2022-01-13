@@ -78,6 +78,13 @@ export async function VarTests(generalService: GeneralService, request, tester: 
     const addTestResultUnderHeadline = tester.addTestResultUnderHeadline;
     const printTestResults = tester.printTestResults;
 
+    let varKey;
+    if (request.body.varKeyPro) {
+        varKey = request.body.varKeyPro;
+    } else {
+        varKey = request.body.varKeyStage;
+    }
+
     console.log('Initiate Var API Tests | ' + generalService.getTime());
 
     //Fixed by Shir in 25/11/2020 - now this test can run on all servers - if the version name start with Pepperitest Test
@@ -342,7 +349,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -377,7 +384,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -415,7 +422,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(tempNewAddonBody),
             },
@@ -441,7 +448,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -464,7 +471,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -474,7 +481,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -484,7 +491,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -547,7 +554,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -568,7 +575,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -588,7 +595,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -598,7 +605,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -608,7 +615,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -665,7 +672,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -715,7 +722,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -731,7 +738,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -779,7 +786,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -819,7 +826,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(tempNewAddonVersionBody),
             },
@@ -832,7 +839,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -873,7 +880,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -885,7 +892,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -898,7 +905,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -924,7 +931,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -938,7 +945,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -948,7 +955,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -958,7 +965,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1006,7 +1013,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1019,7 +1026,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1041,7 +1048,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `GET`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -1063,7 +1070,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `GET`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -1111,7 +1118,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1127,7 +1134,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -1143,7 +1150,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1160,7 +1167,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `GET`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -1183,7 +1190,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `GET`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -1211,7 +1218,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1225,7 +1232,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1267,7 +1274,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1279,7 +1286,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -1306,7 +1313,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1351,7 +1358,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1363,7 +1370,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -1390,7 +1397,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1437,7 +1444,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1457,7 +1464,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -1491,7 +1498,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `DELETE`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -1505,7 +1512,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1544,7 +1551,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
     //         {
     //             method: `POST`,
     //             headers: {
-    //                 Authorization: request.body.varKey,
+    //                 Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
     //             },
     //             body: JSON.stringify(testDataBody),
     //         },
@@ -1561,7 +1568,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
     //         {
     //             method: `POST`,
     //             headers: {
-    //                 Authorization: request.body.varKey,
+    //                 Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
     //             },
     //             body: JSON.stringify(versionTestDataBody),
     //         },
@@ -1587,7 +1594,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
     //         {
     //             method: `DELETE`,
     //             headers: {
-    //                 Authorization: request.body.varKey,
+    //                 Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
     //             },
     //         },
     //     ).then((response) => response.Body;
@@ -1634,7 +1641,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1654,7 +1661,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -1681,7 +1688,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1729,7 +1736,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1745,7 +1752,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -1759,7 +1766,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -1786,7 +1793,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1800,7 +1807,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1839,7 +1846,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1877,7 +1884,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1893,7 +1900,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -1923,7 +1930,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -1970,7 +1977,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -1986,7 +1993,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -2016,7 +2023,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2063,7 +2070,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -2075,7 +2082,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(
                     testDataNewAddonVersion(
@@ -2095,7 +2102,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -2121,7 +2128,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2135,7 +2142,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2182,7 +2189,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -2194,7 +2201,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(
                     testDataNewAddonVersion(
@@ -2212,7 +2219,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -2239,7 +2246,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2253,7 +2260,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2300,7 +2307,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -2312,7 +2319,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(
                     testDataNewAddonVersion(
@@ -2331,7 +2338,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -2358,7 +2365,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2372,7 +2379,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2420,7 +2427,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -2434,7 +2441,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -2461,7 +2468,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2487,7 +2494,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2501,7 +2508,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2511,7 +2518,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2521,7 +2528,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2567,7 +2574,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -2587,7 +2594,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -2615,7 +2622,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2639,7 +2646,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2653,7 +2660,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2663,7 +2670,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2673,7 +2680,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2724,7 +2731,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -2744,7 +2751,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -2772,7 +2779,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2806,7 +2813,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2820,7 +2827,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2830,7 +2837,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2840,7 +2847,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -2892,7 +2899,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -2940,7 +2947,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             .fetchStatus(generalService['client'].BaseURL.replace('papi-eu', 'papi') + '/var/addons/versions', {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             })
@@ -2991,7 +2998,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `GET`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -3031,7 +3038,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `DELETE`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -3045,7 +3052,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `GET`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -3057,7 +3064,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `DELETE`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -3067,7 +3074,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `GET`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
@@ -3121,7 +3128,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -3146,7 +3153,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(tempNewAddonBody),
             },
@@ -3157,7 +3164,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3202,7 +3209,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3212,7 +3219,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3222,7 +3229,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3278,7 +3285,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -3294,7 +3301,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -3316,7 +3323,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(tempNewAddonVersionBody),
             },
@@ -3402,7 +3409,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3416,7 +3423,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3426,7 +3433,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3436,7 +3443,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3492,7 +3499,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(testDataBody),
             },
@@ -3508,7 +3515,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(versionTestDataBody),
             },
@@ -3529,7 +3536,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify(tempNewAddonVersionBody),
             },
@@ -3560,7 +3567,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3574,7 +3581,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3584,7 +3591,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `DELETE`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3594,7 +3601,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3641,7 +3648,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `POST`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
                 body: JSON.stringify({
                     Name: 'Pepperitest Test (Jenkins Special Addon) - Code Jobs',
@@ -3666,7 +3673,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `POST`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                     body: JSON.stringify(versionTestDataBody),
                 },
@@ -3686,7 +3693,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `POST`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                     body: JSON.stringify(versionTestDataBody),
                 },
@@ -3706,7 +3713,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                 {
                     method: `POST`,
                     headers: {
-                        Authorization: request.body.varKey,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                     body: JSON.stringify(versionTestDataBody),
                 },
@@ -3749,7 +3756,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
             {
                 method: `GET`,
                 headers: {
-                    Authorization: request.body.varKey,
+                    Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                 },
             },
         );
@@ -3768,7 +3775,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
                     {
                         method: `DELETE`,
                         headers: {
-                            Authorization: request.body.varKey,
+                            Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                         },
                     },
                 );
@@ -3819,7 +3826,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
         //     var deleteVersionApiResponse = await generalService.fetchStatus(generalService['client'].BaseURL.replace('papi-eu', 'papi') + "/var/addons/versions/" + createVersionApiResponse.Body.UUID, {
         //     method: `DELETE`,
         //     headers: {
-        //         Authorization: request.body.varKey,
+        //         Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
         //     },
         // }).then((response) => response.Body;
         //     if (!deleteVersionApiResponse) {
@@ -3832,7 +3839,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
         //     {
         //         method: `GET`,
         //         headers: {
-        //             Authorization: request.body.varKey,
+        //             Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
         //         },
         //     },
         // );
@@ -3846,7 +3853,7 @@ export async function VarTests(generalService: GeneralService, request, tester: 
         //             {
         //                 method: `POST`,
         //                 headers: {
-        //                     Authorization: request.body.varKey,
+        //                     Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
         //                 },
         //                 body: JSON.stringify(versionTestDataBody),
         //             },
