@@ -289,7 +289,7 @@ export default class GeneralService {
                 {
                     method: `GET`,
                     headers: {
-                        Authorization: `${varKey}`,
+                        Authorization: `Basic ${Buffer.from(varKey).toString('base64')}`,
                     },
                 },
             );
