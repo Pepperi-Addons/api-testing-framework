@@ -26,10 +26,10 @@ export async function PepperiNotificationServiceTests(
     pepperiNotificationServiceService.papiClient['options'].actionUUID = _Test_UUID_Subscription;
 
     let varKey;
-    if (request.body.varKeyPro) {
-        varKey = request.body.varKeyPro;
-    } else {
+    if (generalService.papiClient['options'].baseURL.includes('staging')) {
         varKey = request.body.varKeyStage;
+    } else {
+        varKey = request.body.varKeyPro;
     }
 
     //#region Upgrade Pepperi Notification Service
