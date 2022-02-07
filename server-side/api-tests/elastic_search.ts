@@ -130,18 +130,18 @@ export async function ElasticSearchTests(generalService: GeneralService, request
         },
     ];
 
-    //#region Upgrade Pepperi Elastic Search
+    //#region Upgrade Data Index Framework
     const testData = {
-        'Pepperi Elastic Search': ['00000000-0000-0000-0000-00000e1a571c', ''],
+        'Data Index Framework': ['00000000-0000-0000-0000-00000e1a571c', ''],
     };
     const isInstalledArr = await generalService.areAddonsInstalled(testData);
     const chnageVersionResponseArr = await generalService.chnageVersion(request.body.varKey, testData, false);
-    //#endregion Upgrade Pepperi Elastic Search
+    //#endregion Upgrade Data Index Framework
 
     describe('Elastic Search Test Suites', () => {
         describe('Prerequisites Addon for Elastic Search Tests', () => {
             //Test Data
-            //Pepperi Elastic Search
+            //Data Index Framework
             it('Validate That All The Needed Addons Installed', async () => {
                 isInstalledArr.forEach((isInstalled) => {
                     expect(isInstalled).to.be.true;
